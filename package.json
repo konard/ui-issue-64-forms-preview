@@ -1,15 +1,11 @@
 {
-  "name": "@link-foundation/example-package-name",
+  "name": "@link-foundation/ui",
   "version": "0.11.31",
-  "description": "A JavaScript/TypeScript package template for AI-driven development",
+  "description": "Associative UI framework whose documents, configuration, styles and animations are written in Links Notation",
   "type": "module",
   "main": "src/index.js",
   "types": "src/index.d.ts",
-  "bin": {
-    "example-package-name": "./bin/example-package-name.js"
-  },
   "files": [
-    "bin/",
     "src/",
     "CHANGELOG.md",
     "LICENSE",
@@ -44,10 +40,11 @@
     "changeset:status": "changeset status --since=origin/main"
   },
   "keywords": [
-    "template",
-    "javascript",
-    "typescript",
-    "ai-driven"
+    "ui",
+    "links-notation",
+    "associative",
+    "design-system",
+    "wysiwyg"
   ],
   "author": "",
   "license": "Unlicense",
@@ -61,10 +58,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/link-foundation/js-ai-driven-development-pipeline-template.git"
+    "url": "git+https://github.com/link-foundation/ui.git"
+  },
+  "homepage": "https://github.com/link-foundation/ui#readme",
+  "bugs": {
+    "url": "https://github.com/link-foundation/ui/issues"
   },
   "engines": {
-    "node": ">=20.0.0"
+    "node": ">=20.10.0"
   },
   "devDependencies": {
     "@changesets/cli": "^3.0.3",

@@ -1,35 +1,19 @@
 /**
- * Example test file using test-anywhere
- * Works with Node.js, Bun, and Deno
+ * Entry point tests. Works with Node.js, Bun, and Deno.
  */
 
 import { describe, it, expect } from 'test-anywhere';
-import { add, multiply } from '../src/index.js';
+import { readFileSync } from 'node:fs';
+import * as entry from '../src/index.js';
 
-describe('add function', () => {
-  it('should add two positive numbers', () => {
-    expect(add(2, 3)).toBe(5);
+const packageJson = JSON.parse(readFileSync('package.json', 'utf8'));
+
+describe('package entry point', () => {
+  it('exports the package version', () => {
+    expect(entry.version).toBe(packageJson.version);
   });
 
-  it('should add negative numbers', () => {
-    expect(add(-1, -2)).toBe(-3);
-  });
-
-  it('should add zero', () => {
-    expect(add(5, 0)).toBe(5);
-  });
-});
-
-describe('multiply function', () => {
-  it('should multiply two positive numbers', () => {
-    expect(multiply(2, 3)).toBe(6);
-  });
-
-  it('should multiply by zero', () => {
-    expect(multiply(5, 0)).toBe(0);
-  });
-
-  it('should multiply negative numbers', () => {
-    expect(multiply(-2, 3)).toBe(-6);
+  it('exports nothing else', () => {
+    expect(Object.keys(entry)).toEqual(['version']);
   });
 });

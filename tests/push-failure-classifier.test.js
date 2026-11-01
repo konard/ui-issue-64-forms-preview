@@ -14,18 +14,18 @@ const ruleViolation = {
     'remote:',
     'remote: - Changes must be made through a pull request.',
     'remote:',
-    'To https://github.com/link-foundation/js-ai-driven-development-pipeline-template',
+    'To https://github.com/link-foundation/ui',
     ' ! [remote rejected]   main -> main (push declined due to repository rule violations)',
-    "error: failed to push some refs to 'https://github.com/link-foundation/js-ai-driven-development-pipeline-template'",
+    "error: failed to push some refs to 'https://github.com/link-foundation/ui'",
   ].join('\n'),
 };
 
 const lostRace = {
   stdout: '',
   stderr: [
-    'To https://github.com/link-foundation/js-ai-driven-development-pipeline-template',
+    'To https://github.com/link-foundation/ui',
     ' ! [rejected]        main -> main (non-fast-forward)',
-    "error: failed to push some refs to 'https://github.com/link-foundation/js-ai-driven-development-pipeline-template'",
+    "error: failed to push some refs to 'https://github.com/link-foundation/ui'",
     'hint: Updates were rejected because the tip of your current branch is behind',
   ].join('\n'),
 };
