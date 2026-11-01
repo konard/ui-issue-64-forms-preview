@@ -1,0 +1,28 @@
+{
+  "spec": "ui-dialect/0",
+  "elements": [
+    {
+      "id": "run",
+      "kind": "button",
+      "positional": ["Run"],
+      "properties": [
+        {
+          "name": "on",
+          "values": ["press", ["eval", "alert(1)"]]
+        }
+      ],
+      "children": [],
+      "unknown": []
+    }
+  ],
+  "diagnostics": [
+    {
+      "code": "unknown-action",
+      "severity": "warning",
+      "at": {
+        "element": "run",
+        "property": "on"
+      }
+    }
+  ]
+}

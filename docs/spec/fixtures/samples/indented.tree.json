@@ -1,0 +1,50 @@
+{
+  "spec": "ui-dialect/0",
+  "elements": [
+    {
+      "id": "app",
+      "kind": "document",
+      "positional": [],
+      "properties": [
+        {
+          "name": "title",
+          "values": ["Links UI demo"]
+        }
+      ],
+      "children": [
+        {
+          "id": "body",
+          "kind": "stack",
+          "positional": [],
+          "properties": [],
+          "children": [
+            {
+              "id": "greeting",
+              "kind": "text",
+              "positional": ["Hello, links"],
+              "properties": [],
+              "children": [],
+              "unknown": []
+            },
+            {
+              "id": "ok",
+              "kind": "button",
+              "positional": [],
+              "properties": [
+                {
+                  "name": "label",
+                  "values": ["OK"]
+                }
+              ],
+              "children": [],
+              "unknown": []
+            }
+          ],
+          "unknown": []
+        }
+      ],
+      "unknown": []
+    }
+  ],
+  "diagnostics": []
+}

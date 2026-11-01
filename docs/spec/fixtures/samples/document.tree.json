@@ -1,0 +1,71 @@
+{
+  "spec": "ui-dialect/0",
+  "elements": [
+    {
+      "id": "app",
+      "kind": "document",
+      "positional": [],
+      "properties": [
+        {
+          "name": "title",
+          "values": ["Links UI demo"]
+        },
+        {
+          "name": "theme",
+          "values": ["material3"]
+        }
+      ],
+      "children": [
+        {
+          "id": "body",
+          "kind": "stack",
+          "positional": [],
+          "properties": [
+            {
+              "name": "direction",
+              "values": ["vertical"]
+            },
+            {
+              "name": "gap",
+              "values": [["token", "space.medium"]]
+            }
+          ],
+          "children": [
+            {
+              "id": "greeting",
+              "kind": "text",
+              "positional": ["Hello, links"],
+              "properties": [],
+              "children": [],
+              "unknown": []
+            },
+            {
+              "id": "ok",
+              "kind": "button",
+              "positional": [],
+              "properties": [
+                {
+                  "name": "label",
+                  "values": ["OK"]
+                },
+                {
+                  "name": "variant",
+                  "values": ["filled"]
+                },
+                {
+                  "name": "on",
+                  "values": ["press", ["navigate", "home"]]
+                }
+              ],
+              "children": [],
+              "unknown": []
+            }
+          ],
+          "unknown": []
+        }
+      ],
+      "unknown": []
+    }
+  ],
+  "diagnostics": []
+}

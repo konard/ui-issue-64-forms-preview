@@ -1,0 +1,44 @@
+{
+  "spec": "ui-dialect/0",
+  "elements": [
+    {
+      "id": "box",
+      "kind": "stack",
+      "positional": [],
+      "properties": [
+        {
+          "name": "gap",
+          "values": ["16px"]
+        },
+        {
+          "name": "padding",
+          "values": ["1.5rem"]
+        }
+      ],
+      "children": [],
+      "unknown": []
+    },
+    {
+      "id": "hero",
+      "kind": "image",
+      "positional": ["hero.png"],
+      "properties": [
+        {
+          "name": "width",
+          "values": ["50%"]
+        },
+        {
+          "name": "height",
+          "values": ["40vh"]
+        },
+        {
+          "name": "alt",
+          "values": ["Hero"]
+        }
+      ],
+      "children": [],
+      "unknown": []
+    }
+  ],
+  "diagnostics": []
+}

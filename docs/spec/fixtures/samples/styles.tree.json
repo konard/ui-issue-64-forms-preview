@@ -1,0 +1,42 @@
+{
+  "spec": "ui-dialect/0",
+  "elements": [
+    {
+      "id": "button-style",
+      "kind": "style",
+      "positional": [],
+      "properties": [
+        {
+          "name": "selector",
+          "values": [
+            ["type", "button"],
+            ["variant", "filled"]
+          ]
+        },
+        {
+          "name": "background",
+          "values": [["token", "color.primary"]]
+        },
+        {
+          "name": "color",
+          "values": [["token", "color.on-primary"]]
+        },
+        {
+          "name": "radius",
+          "values": [["token", "shape.corner.medium"]]
+        },
+        {
+          "name": "state",
+          "values": ["hover", ["elevation", "2"]]
+        },
+        {
+          "name": "state",
+          "values": ["pressed", ["scale", "0.98"]]
+        }
+      ],
+      "children": [],
+      "unknown": []
+    }
+  ],
+  "diagnostics": []
+}

@@ -1,0 +1,32 @@
+{
+  "spec": "ui-dialect/0",
+  "elements": [
+    {
+      "id": "home-link",
+      "kind": "button",
+      "positional": ["Home"],
+      "properties": [
+        {
+          "name": "on",
+          "values": ["press", ["navigate", "home"]]
+        }
+      ],
+      "children": [],
+      "unknown": []
+    },
+    {
+      "id": "docs-link",
+      "kind": "button",
+      "positional": ["Docs"],
+      "properties": [
+        {
+          "name": "on",
+          "values": ["press", ["navigate", "https://example.com/docs"]]
+        }
+      ],
+      "children": [],
+      "unknown": []
+    }
+  ],
+  "diagnostics": []
+}

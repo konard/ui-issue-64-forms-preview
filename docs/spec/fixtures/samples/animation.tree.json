@@ -1,0 +1,61 @@
+{
+  "spec": "ui-dialect/0",
+  "elements": [
+    {
+      "id": "press-feedback",
+      "kind": "animation",
+      "positional": [],
+      "properties": [
+        {
+          "name": "target",
+          "values": ["ok"]
+        },
+        {
+          "name": "duration",
+          "values": [["token", "motion.duration.short"]]
+        },
+        {
+          "name": "easing",
+          "values": ["standard"]
+        },
+        {
+          "name": "track",
+          "values": [
+            "scale",
+            ["key", "0", "1"],
+            ["key", "0.5", "0.96"],
+            ["key", "1", "1"]
+          ]
+        }
+      ],
+      "children": [],
+      "unknown": []
+    },
+    {
+      "id": "recording-1",
+      "kind": "recording",
+      "positional": [],
+      "properties": [
+        {
+          "name": "started",
+          "values": ["2026-11-01T12:00:00Z"]
+        },
+        {
+          "name": "event",
+          "values": ["0ms", ["set", "ok", "label", "OK"]]
+        },
+        {
+          "name": "event",
+          "values": ["840ms", ["input", "pointer", "down", "ok"]]
+        },
+        {
+          "name": "event",
+          "values": ["990ms", ["set", "ok", "label", "Saved"]]
+        }
+      ],
+      "children": [],
+      "unknown": []
+    }
+  ],
+  "diagnostics": []
+}

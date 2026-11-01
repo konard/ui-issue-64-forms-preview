@@ -1,0 +1,1 @@
+(evil: button 'Click' (on press (navigate 'javascript:alert(1)')))

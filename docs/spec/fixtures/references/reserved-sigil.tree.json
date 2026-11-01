@@ -1,0 +1,43 @@
+{
+  "spec": "ui-dialect/0",
+  "elements": [
+    {
+      "id": "card",
+      "kind": "stack",
+      "positional": [],
+      "properties": [
+        {
+          "name": "gap",
+          "values": ["@space.medium"]
+        }
+      ],
+      "children": [],
+      "unknown": []
+    },
+    {
+      "id": "name",
+      "kind": "text",
+      "positional": ["$draft.text"],
+      "properties": [],
+      "children": [],
+      "unknown": []
+    }
+  ],
+  "diagnostics": [
+    {
+      "code": "reserved-sigil",
+      "severity": "warning",
+      "at": {
+        "element": "card",
+        "property": "gap"
+      }
+    },
+    {
+      "code": "reserved-sigil",
+      "severity": "warning",
+      "at": {
+        "element": "name"
+      }
+    }
+  ]
+}

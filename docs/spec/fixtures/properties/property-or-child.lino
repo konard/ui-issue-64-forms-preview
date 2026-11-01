@@ -1,0 +1,1 @@
+(row: stack (direction horizontal) (text 'text is a kind, so this is a child') (gap 4px))

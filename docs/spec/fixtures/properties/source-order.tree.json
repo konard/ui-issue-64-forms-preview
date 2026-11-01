@@ -1,0 +1,31 @@
+{
+  "spec": "ui-dialect/0",
+  "elements": [
+    {
+      "id": "card",
+      "kind": "stack",
+      "positional": [],
+      "properties": [
+        {
+          "name": "gap",
+          "values": ["12px"]
+        },
+        {
+          "name": "padding",
+          "values": ["16px"]
+        },
+        {
+          "name": "align",
+          "values": ["center"]
+        },
+        {
+          "name": "direction",
+          "values": ["vertical"]
+        }
+      ],
+      "children": [],
+      "unknown": []
+    }
+  ],
+  "diagnostics": []
+}

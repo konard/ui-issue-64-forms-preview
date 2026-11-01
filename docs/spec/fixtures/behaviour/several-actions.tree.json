@@ -1,0 +1,33 @@
+{
+  "spec": "ui-dialect/0",
+  "elements": [
+    {
+      "id": "save",
+      "kind": "button",
+      "positional": ["Save"],
+      "properties": [
+        {
+          "name": "on",
+          "values": [
+            "press",
+            ["set", "status", "value", "Saving"],
+            ["emit", "save"],
+            ["toggle", "menu", "open"],
+            ["focus", "status"]
+          ]
+        }
+      ],
+      "children": [],
+      "unknown": []
+    },
+    {
+      "id": "status",
+      "kind": "text",
+      "positional": [""],
+      "properties": [],
+      "children": [],
+      "unknown": []
+    }
+  ],
+  "diagnostics": []
+}

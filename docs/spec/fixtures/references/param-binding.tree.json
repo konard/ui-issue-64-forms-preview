@@ -1,0 +1,19 @@
+{
+  "spec": "ui-dialect/0",
+  "elements": [
+    {
+      "id": "draft",
+      "kind": "text",
+      "positional": [],
+      "properties": [
+        {
+          "name": "bind",
+          "values": ["value", ["param", "draft.text"]]
+        }
+      ],
+      "children": [],
+      "unknown": []
+    }
+  ],
+  "diagnostics": []
+}

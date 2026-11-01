@@ -1,0 +1,2 @@
+(brand: theme (token color.primary '#6750A4') (token color.scrim '#6750A4CC') (token color.short '#FFF'))
+(chip: style (background '#6750A4') (color '#FFFFFF'))

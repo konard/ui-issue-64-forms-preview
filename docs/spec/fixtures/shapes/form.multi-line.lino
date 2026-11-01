@@ -1,0 +1,6 @@
+(form: stack
+  (direction vertical)
+  (gap 8px)
+  (title: text 'Sign in')
+  (save: button 'Save'
+    (on press (emit save) (navigate home))))

@@ -1,0 +1,28 @@
+{
+  "spec": "ui-dialect/0",
+  "elements": [
+    {
+      "id": "bad",
+      "kind": "button",
+      "positional": ["Bad"],
+      "properties": [
+        {
+          "name": "on",
+          "values": ["press", "alert(1)"]
+        }
+      ],
+      "children": [],
+      "unknown": []
+    }
+  ],
+  "diagnostics": [
+    {
+      "code": "invalid-handler",
+      "severity": "error",
+      "at": {
+        "element": "bad",
+        "property": "on"
+      }
+    }
+  ]
+}

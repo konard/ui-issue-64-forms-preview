@@ -1,0 +1,53 @@
+{
+  "spec": "ui-dialect/0",
+  "elements": [
+    {
+      "id": "base",
+      "kind": "theme",
+      "positional": [],
+      "properties": [
+        {
+          "name": "token",
+          "values": ["space.small", "4px"]
+        },
+        {
+          "name": "token",
+          "values": ["space.medium", ["token", "space.small"]]
+        }
+      ],
+      "children": [],
+      "unknown": []
+    },
+    {
+      "id": "m3",
+      "kind": "theme",
+      "positional": [],
+      "properties": [
+        {
+          "name": "extends",
+          "values": ["base"]
+        },
+        {
+          "name": "token",
+          "values": ["color.primary", "#6750A4"]
+        }
+      ],
+      "children": [],
+      "unknown": []
+    },
+    {
+      "id": "col",
+      "kind": "stack",
+      "positional": [],
+      "properties": [
+        {
+          "name": "gap",
+          "values": [["token", "space.medium"]]
+        }
+      ],
+      "children": [],
+      "unknown": []
+    }
+  ],
+  "diagnostics": []
+}

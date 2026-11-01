@@ -1,0 +1,39 @@
+{
+  "spec": "ui-dialect/0",
+  "elements": [
+    {
+      "id": "material3",
+      "kind": "theme",
+      "positional": [],
+      "properties": [
+        {
+          "name": "extends",
+          "values": ["base"]
+        },
+        {
+          "name": "token",
+          "values": ["color.primary", "#6750A4"]
+        },
+        {
+          "name": "token",
+          "values": ["color.on-primary", "#FFFFFF"]
+        },
+        {
+          "name": "token",
+          "values": ["space.medium", "16px"]
+        },
+        {
+          "name": "token",
+          "values": ["shape.corner.medium", "12px"]
+        },
+        {
+          "name": "token",
+          "values": ["motion.duration.short", "150ms"]
+        }
+      ],
+      "children": [],
+      "unknown": []
+    }
+  ],
+  "diagnostics": []
+}

@@ -1,0 +1,1 @@
+(run: button 'Run' (on press (eval 'alert(1)')))
