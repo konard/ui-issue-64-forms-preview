@@ -1,4 +1,5 @@
 ---
+'@link-foundation/ui-core': patch
 ---
 
-Add shared Playwright Test + axe-core infrastructure for visual regression and WCAG 2.2 A/AA tests (dev/CI only; no published package changes).
+Add the shared Playwright Test and axe-core setup for visual regression and WCAG 2.2 A/AA tests. The tools are dev/CI only; the published package code is unchanged.
