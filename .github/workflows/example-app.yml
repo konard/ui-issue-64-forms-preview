@@ -5,7 +5,7 @@ on:
     types: [opened, synchronize, reopened]
     paths:
       - 'examples/universal-app/**'
-      - 'src/**'
+      - 'packages/*/src/**'
       - 'package.json'
       - 'package-lock.json'
       - 'scripts/update-preview-images.mjs'
@@ -19,7 +19,7 @@ on:
       - main
     paths:
       - 'examples/universal-app/**'
-      - 'src/**'
+      - 'packages/*/src/**'
       - 'package.json'
       - 'package-lock.json'
       - 'scripts/update-preview-images.mjs'
