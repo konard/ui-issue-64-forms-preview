@@ -1,0 +1,7 @@
+(button-style: style
+  (selector (type button) (variant filled))
+  (background (token color.primary))
+  (color (token color.on-primary))
+  (radius (token shape.corner.medium))
+  (state hover (elevation 2))
+  (state pressed (scale 0.98)))

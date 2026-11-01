@@ -1,0 +1,52 @@
+Dependency Graph Prerequisite	Check dependency graph availability	﻿2026-11-01T10:56:49.2900374Z ##[group]Run mode=()
+Dependency Graph Prerequisite	Check dependency graph availability	2026-11-01T10:56:49.2900941Z ^[[36;1mmode=()^[[0m
+Dependency Graph Prerequisite	Check dependency graph availability	2026-11-01T10:56:49.2901531Z ^[[36;1mif [[ "$REQUIRE_GRAPH" == 1 ]]; then mode=(--require); fi^[[0m
+Dependency Graph Prerequisite	Check dependency graph availability	2026-11-01T10:56:49.2902390Z ^[[36;1mbash scripts/check-dependency-graph.sh "$BASE_SHA" "$HEAD_SHA" "${mode[@]}"^[[0m
+Dependency Graph Prerequisite	Check dependency graph availability	2026-11-01T10:56:49.2919846Z shell: /usr/bin/bash -e {0}
+Dependency Graph Prerequisite	Check dependency graph availability	2026-11-01T10:56:49.2920527Z env:
+Dependency Graph Prerequisite	Check dependency graph availability	2026-11-01T10:56:49.2920910Z   GIT_CONFIG_COUNT: 1
+Dependency Graph Prerequisite	Check dependency graph availability	2026-11-01T10:56:49.2921341Z   GIT_CONFIG_KEY_0: init.defaultBranch
+Dependency Graph Prerequisite	Check dependency graph availability	2026-11-01T10:56:49.2921816Z   GIT_CONFIG_VALUE_0: main
+Dependency Graph Prerequisite	Check dependency graph availability	2026-11-01T10:56:49.2924843Z   GH_TOKEN: ***
+Dependency Graph Prerequisite	Check dependency graph availability	2026-11-01T10:56:49.2925437Z   REPO: link-foundation/ui
+Dependency Graph Prerequisite	Check dependency graph availability	2026-11-01T10:56:49.2925905Z   BASE_SHA: 0000000000000000000000000000000000000000
+Dependency Graph Prerequisite	Check dependency graph availability	2026-11-01T10:56:49.2926428Z   HEAD_SHA: 428ee078e1dac9caf52517410df9992605048c88
+Dependency Graph Prerequisite	Check dependency graph availability	2026-11-01T10:56:49.2926928Z   REQUIRE_GRAPH: 1
+Dependency Graph Prerequisite	Check dependency graph availability	2026-11-01T10:56:49.2927309Z ##[endgroup]
+Dependency Graph Prerequisite	Check dependency graph availability	2026-11-01T10:56:49.7429199Z GitHub answered: {"message":"Forbidden","documentation_url":"https://docs.github.com/rest/dependency-graph/dependency-review#get-a-diff-of-the-dependencies-between-commits","status":"403"}gh: Forbidden (HTTP 403)
+Dependency Graph Prerequisite	Check dependency graph availability	2026-11-01T10:56:49.7455817Z ##[error]The dependency graph of link-foundation/ui is disabled, so dependency review cannot run. A repository administrator has to enable "Dependency graph" at https://github.com/link-foundation/ui/settings/security_analysis.
+Dependency Graph Prerequisite	Check dependency graph availability	2026-11-01T10:56:49.7470706Z ##[error]Process completed with exit code 1.
+Pipeline Status	Fail the run when a required job was cancelled or failed	﻿2026-11-01T10:58:36.4696396Z ##[group]Run bash scripts/check-pipeline-status.sh
+Pipeline Status	Fail the run when a required job was cancelled or failed	2026-11-01T10:58:36.4696986Z ^[[36;1mbash scripts/check-pipeline-status.sh^[[0m
+Pipeline Status	Fail the run when a required job was cancelled or failed	2026-11-01T10:58:36.4728462Z shell: /usr/bin/bash -e {0}
+Pipeline Status	Fail the run when a required job was cancelled or failed	2026-11-01T10:58:36.4728850Z env:
+Pipeline Status	Fail the run when a required job was cancelled or failed	2026-11-01T10:58:36.4729124Z   GIT_CONFIG_COUNT: 1
+Pipeline Status	Fail the run when a required job was cancelled or failed	2026-11-01T10:58:36.4729446Z   GIT_CONFIG_KEY_0: init.defaultBranch
+Pipeline Status	Fail the run when a required job was cancelled or failed	2026-11-01T10:58:36.4729789Z   GIT_CONFIG_VALUE_0: main
+Pipeline Status	Fail the run when a required job was cancelled or failed	2026-11-01T10:58:36.4730788Z   NEEDS_JSON: {
+Pipeline Status	Fail the run when a required job was cancelled or failed	  "codeql": {
+Pipeline Status	Fail the run when a required job was cancelled or failed	    "result": "success",
+Pipeline Status	Fail the run when a required job was cancelled or failed	    "outputs": {}
+Pipeline Status	Fail the run when a required job was cancelled or failed	  },
+Pipeline Status	Fail the run when a required job was cancelled or failed	  "dependency-review": {
+Pipeline Status	Fail the run when a required job was cancelled or failed	    "result": "skipped",
+Pipeline Status	Fail the run when a required job was cancelled or failed	    "outputs": {}
+Pipeline Status	Fail the run when a required job was cancelled or failed	  },
+Pipeline Status	Fail the run when a required job was cancelled or failed	  "dependency-graph": {
+Pipeline Status	Fail the run when a required job was cancelled or failed	    "result": "failure",
+Pipeline Status	Fail the run when a required job was cancelled or failed	    "outputs": {
+Pipeline Status	Fail the run when a required job was cancelled or failed	      "enabled": "false"
+Pipeline Status	Fail the run when a required job was cancelled or failed	    }
+Pipeline Status	Fail the run when a required job was cancelled or failed	  },
+Pipeline Status	Fail the run when a required job was cancelled or failed	  "npm-audit": {
+Pipeline Status	Fail the run when a required job was cancelled or failed	    "result": "success",
+Pipeline Status	Fail the run when a required job was cancelled or failed	    "outputs": {}
+Pipeline Status	Fail the run when a required job was cancelled or failed	  }
+Pipeline Status	Fail the run when a required job was cancelled or failed	}
+Pipeline Status	Fail the run when a required job was cancelled or failed	2026-11-01T10:58:36.4731849Z   RUN_SHA: 428ee078e1dac9caf52517410df9992605048c88
+Pipeline Status	Fail the run when a required job was cancelled or failed	2026-11-01T10:58:36.4732237Z   HEAD_REF: refs/heads/main
+Pipeline Status	Fail the run when a required job was cancelled or failed	2026-11-01T10:58:36.4732567Z ##[endgroup]
+Pipeline Status	Fail the run when a required job was cancelled or failed	2026-11-01T10:58:36.5446494Z Failed jobs:    dependency-graph
+Pipeline Status	Fail the run when a required job was cancelled or failed	2026-11-01T10:58:36.5447232Z Cancelled jobs: <none>
+Pipeline Status	Fail the run when a required job was cancelled or failed	2026-11-01T10:58:36.5464398Z ##[error]Failing jobs: dependency-graph
+Pipeline Status	Fail the run when a required job was cancelled or failed	2026-11-01T10:58:36.5475945Z ##[error]Process completed with exit code 1.
