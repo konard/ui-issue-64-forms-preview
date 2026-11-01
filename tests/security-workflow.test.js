@@ -139,3 +139,71 @@ it('excludes experiments and examples through an explicit CodeQL configuration',
   expect(config).toMatch(/- experiments\b/);
   expect(config).toMatch(/- examples\b/);
 });
+
+describe('dependency review licence policy', () => {
+  const permissive = [
+    'MIT',
+    'ISC',
+    'BSD-2-Clause',
+    'BSD-3-Clause',
+    'Apache-2.0',
+    '0BSD',
+    'Unlicense',
+    'CC0-1.0',
+    'CC-BY-4.0',
+    'BlueOak-1.0.0',
+    'Python-2.0',
+  ];
+
+  function readFolded(key) {
+    const match = workflow.match(
+      new RegExp(`\\n( +)${key}: >-\\n((?:\\1 {2}.*\\n)+)`)
+    );
+    if (!match) {
+      return [];
+    }
+    return match[2]
+      .split(/[,\n]/)
+      .map((item) => item.trim())
+      .filter(Boolean);
+  }
+
+  const allowed = readFolded('allow-licenses');
+  const exceptions = readFolded('allow-dependencies-licenses').map((purl) =>
+    decodeURIComponent(purl.replace(/^pkg:npm\//, ''))
+  );
+
+  it('allows exactly the permissive licence list', () => {
+    expect([...allowed].sort()).toEqual([...permissive].sort());
+  });
+
+  it('denies GPL-family, AGPL and non-commercial licences', () => {
+    for (const denied of allowed) {
+      expect(/GPL|NC|SSPL|BUSL|Commons-Clause/i.test(denied)).toBe(false);
+    }
+  });
+
+  it('covers every locked dependency by the list or a reviewed exception', () => {
+    const isAllowed = (licence) =>
+      licence
+        .replace(/[()]/g, '')
+        .split(/\s+OR\s+/)
+        .some((alt) =>
+          alt.split(/\s+AND\s+/).every((part) => allowed.includes(part.trim()))
+        );
+    const failing = [];
+    for (const lock of listPackageLocks()) {
+      const { packages = {} } = JSON.parse(readFileSync(lock, 'utf8'));
+      for (const [path, info] of Object.entries(packages)) {
+        if (!path) {
+          continue;
+        }
+        const name = path.replace(/.*node_modules\//, '');
+        if (!isAllowed(info.license ?? '') && !exceptions.includes(name)) {
+          failing.push(`${lock}: ${name} (${info.license})`);
+        }
+      }
+    }
+    expect(failing).toEqual([]);
+  });
+});

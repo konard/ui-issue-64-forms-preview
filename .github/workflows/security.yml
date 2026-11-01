@@ -117,6 +117,36 @@ jobs:
         with:
           fail-on-severity: high
           comment-summary-in-pr: on-failure
+          # Licence policy (requirement R25): only permissive
+          # licences are allowed, so GPL-family, AGPL, non-commercial and
+          # "source available" licences fail the review.
+          allow-licenses: >-
+            MIT, ISC, BSD-2-Clause, BSD-3-Clause, Apache-2.0, 0BSD,
+            Unlicense, CC0-1.0, CC-BY-4.0, BlueOak-1.0.0, Python-2.0
+          # Existing dependencies outside the list above, reviewed one by one:
+          # - @resvg/resvg-js*: MPL-2.0 (file-level copyleft), transitive dev-only SVG
+          #   renderer for preview images; never bundled or modified.
+          # - buffers, chainsaw: MIT/X11 (MIT wording, not an SPDX id) and no
+          #   licence field; transitive deps of the artifact-transport action.
+          # - truncate-utf8-bytes: WTFPL (permissive), transitive dependency
+          #   of examples/universal-app (via sanitize-filename).
+          allow-dependencies-licenses: >-
+            pkg:npm/%40resvg/resvg-js,
+            pkg:npm/%40resvg/resvg-js-android-arm-eabi,
+            pkg:npm/%40resvg/resvg-js-android-arm64,
+            pkg:npm/%40resvg/resvg-js-darwin-arm64,
+            pkg:npm/%40resvg/resvg-js-darwin-x64,
+            pkg:npm/%40resvg/resvg-js-linux-arm-gnueabihf,
+            pkg:npm/%40resvg/resvg-js-linux-arm64-gnu,
+            pkg:npm/%40resvg/resvg-js-linux-arm64-musl,
+            pkg:npm/%40resvg/resvg-js-linux-x64-gnu,
+            pkg:npm/%40resvg/resvg-js-linux-x64-musl,
+            pkg:npm/%40resvg/resvg-js-win32-arm64-msvc,
+            pkg:npm/%40resvg/resvg-js-win32-ia32-msvc,
+            pkg:npm/%40resvg/resvg-js-win32-x64-msvc,
+            pkg:npm/buffers,
+            pkg:npm/chainsaw,
+            pkg:npm/truncate-utf8-bytes
 
   npm-audit:
     name: Audit npm lock (${{ matrix.directory }})
