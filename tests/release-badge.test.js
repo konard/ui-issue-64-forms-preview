@@ -58,7 +58,7 @@ describe('generated npm badge detection', () => {
   // Execute each formatter guard without invoking GitHub or its CDN loaders.
   const guards = [
     'scripts/format-release-notes.mjs',
-    'docs/case-studies/issue-3/original-format-release-notes.mjs',
+    'docs/template-history/case-studies/issue-3/original-format-release-notes.mjs',
   ].map(
     (file) =>
       new Function(

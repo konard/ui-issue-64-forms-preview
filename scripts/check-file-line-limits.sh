@@ -13,7 +13,8 @@
 #
 # Intentional exceptions (kept in sync with the eslint.config.js ignore
 # list): case-study and generated-data files under
-# docs/case-studies/*/data/ mirror external sources verbatim and must not
+# docs/case-studies/*/data/ and docs/template-history/case-studies/*/data/
+# mirror external sources verbatim and must not
 # be reflowed to satisfy the limit, so they are excluded here.
 #
 # Usage:
@@ -69,6 +70,7 @@ check_file() {
 is_exempt() {
   case "$1" in
     docs/case-studies/*/data/*) return 0 ;;
+    docs/template-history/case-studies/*/data/*) return 0 ;;
     *) return 1 ;;
   esac
 }

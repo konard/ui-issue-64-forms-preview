@@ -342,6 +342,7 @@ describe('workflow reliability policy', () => {
       '--hidden',
       '--extensions md,html',
       '--exclude-path docs/case-studies',
+      '--exclude-path docs/template-history/case-studies',
       '--exclude-path dev/log',
       `--exclude-path ${viteSourceHtmlPath}`,
       '--exclude-path tests/fixtures',

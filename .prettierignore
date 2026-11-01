@@ -8,4 +8,5 @@ package-lock.json
 CLAUDE.md
 # Case study raw data files (downloaded from external sources)
 docs/case-studies/*/data/
+docs/template-history/case-studies/*/data/
 dev/log/

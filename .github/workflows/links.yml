@@ -93,6 +93,7 @@ jobs:
             --hidden
             --extensions md,html
             --exclude-path docs/case-studies
+            --exclude-path docs/template-history/case-studies
             --exclude-path dev/log
             --exclude-path examples/universal-app/index.html
             --exclude-path tests/fixtures

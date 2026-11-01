@@ -39,7 +39,7 @@ Native JavaScript is the implementation language. No Rust translation or adapter
 - Node: 1,016 passed; Bun: 1,016 passed; Deno: 1,015 passed, one existing skip: Deno resolves imports from an npm-style bin symlink directory.
 - Offline real-changeset rehearsal preserved all non-version manifest/lock fields.
 - ESLint, Prettier, duplication (8.51%, below 10%), secrets, actionlint 1.7.12, ShellCheck 0.11.0, both zizmor 1.30.1 passes, syntax, required docs, workflow policy and status-gate coverage passed.
-- Full requirement inventory, research and component choices: `docs/issue-273-analysis.md`.
+- Full requirement inventory, research and component choices: `docs/template-history/issue-273-analysis.md`.
 - Regression failures and complete command logs retained in ignored `ci-logs/*.log`; downloaded research is in `ci-logs/issue-273-research/`.
 - Latest issue and all three PR comment types remain empty. `origin/main` is already an ancestor of this branch.
 - Hosted 300+ file verification completed on the first candidate; final-revision CI remains pending.
@@ -53,7 +53,7 @@ Markdown fixtures. GitHub's PR diff endpoint rejected that candidate with its
 
 The JavaScript CodeQL analysis completed and uploaded SARIF. The new gate rejected
 one real finding, `js/incomplete-url-substring-sanitization`, in the executable
-historical release formatter at `docs/case-studies/issue-3/original-format-release-notes.mjs:87`.
+historical release formatter at `docs/template-history/case-studies/issue-3/original-format-release-notes.mjs:87`.
 Job 123748804999 log lines 2692–2694 show the finding and failing exit; the next
 artifact step successfully retained the report. Replaying that downloaded report
 through the real CLI also exited 1. The log shows full-analysis mode at init and

@@ -14,6 +14,14 @@ Changesets 3 requires a supported Node.js 22.11, 24, or 26+ runtime.
 7. **Commit and push** (pre-commit hooks will run automatically)
 8. **Create a Pull Request**
 
+### Case study folders
+
+`docs/case-studies/issue-N/` is only for issue `N` of
+[link-foundation/ui](https://github.com/link-foundation/ui/issues). Research
+inherited from the template repository lives in
+[`docs/template-history/`](template-history/README.md), where issue numbers
+refer to the template repository's issues. Do not add new files there.
+
 ## Code Standards
 
 ### File Size Limits
