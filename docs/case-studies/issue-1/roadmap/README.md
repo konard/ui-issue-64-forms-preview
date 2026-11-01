@@ -163,6 +163,7 @@ connected with the GitHub "blocked by" relation when the issues are created.
 | --- | ------------------------------------------ | ---------- | ------------ |
 | F44 | ui-animation: animation model and player   | F12, F16   | R4, R6       |
 | F45 | Animation and interaction recorder, replay | F44, F08   | R4, R7       |
+| F66 | ui-sound: UI sound themes with Web Audio   | F10, F25   | R13, R14     |
 
 ### Phase 7 — Development mode and designer
 
@@ -201,7 +202,7 @@ connected with the GitHub "blocked by" relation when the issues are created.
 | F61 | Migrate formal-ai                                      | F30, F13, F37 | R1.8, R23      |
 | F62 | Migrate deepcase                                       | F43, F34      | R1.5, R14, R23 |
 | F63 | Migrate anime-avatar                                   | F37, F45      | R1.3, R23      |
-| F64 | Migrate immortality                                    | F37, F44      | R1.2, R23      |
+| F64 | Migrate immortality                                    | F37, F44, F66 | R1.2, R23      |
 | F65 | Migrate the remaining UI projects of our organisations | F57           | R1.9, R23      |
 
 ### Tracking

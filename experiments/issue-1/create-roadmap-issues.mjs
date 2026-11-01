@@ -111,6 +111,17 @@ export const loadIssues = (dir = ISSUES_DIR) =>
     )
     .sort(compareKeys);
 
+// Returns `#N` references outside code that GitHub would autolink to this
+// repository: not preceded by a word character, `&` or `[` (markdown
+// link text whose target is given explicitly).
+export const findBareIssueRefs = (markdown) => {
+  const prose = markdown
+    .replace(/```[\s\S]*?```/g, '')
+    .replace(/`[^`\n]*`/g, '')
+    .replace(/\]\([^)]*\)/g, ']');
+  return [...prose.matchAll(/(?<![\w&[])#\d+\b/g)].map((m) => m[0]);
+};
+
 export const validateIssues = (issues) => {
   const keys = new Set(issues.map((issue) => issue.key));
   const errors = [];
@@ -123,6 +134,14 @@ export const validateIssues = (issues) => {
     for (const ref of issue.body.matchAll(/\{\{([A-Z]\d+)\}\}/g)) {
       if (!keys.has(ref[1])) {
         errors.push(`${issue.key}: unknown reference {{${ref[1]}}}`);
+      }
+    }
+    // A bare `#N` in an issue body links to an issue of THIS repository, so a
+    // reference to another repository's issue must be written as
+    // `owner/repo#N` or as a full URL. Only `#1` (the planning issue) is bare.
+    for (const ref of findBareIssueRefs(issue.body)) {
+      if (ref !== '#1') {
+        errors.push(`${issue.key}: bare issue reference ${ref}`);
       }
     }
     if (
@@ -163,8 +182,15 @@ const gh = (args, input) => {
     stdio: ['pipe', 'pipe', 'inherit'],
   });
 };
-const ghJson = (args, payload) =>
-  JSON.parse(gh([...args, '--input', '-'], JSON.stringify(payload)));
+// GitHub's secondary rate limit allows about 80 content-creating requests per
+// minute, so every mutating call waits a little before it runs.
+const MUTATION_PAUSE_MS = Number(process.env.ROADMAP_PAUSE_MS ?? 1000);
+const pause = (ms) =>
+  Atomics.wait(new Int32Array(new SharedArrayBuffer(4)), 0, 0, ms);
+const ghJson = (args, payload) => {
+  pause(MUTATION_PAUSE_MS);
+  return JSON.parse(gh([...args, '--input', '-'], JSON.stringify(payload)));
+};
 
 const loadState = () =>
   existsSync(STATE_FILE) ? JSON.parse(readFileSync(STATE_FILE, 'utf8')) : {};
