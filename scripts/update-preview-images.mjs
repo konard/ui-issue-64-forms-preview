@@ -21,16 +21,17 @@
  * tracing, dumps PNG signatures, and prints the resolved <html data-theme>
  * and <html lang> so any future regression is diagnosable from CI logs alone.
  */
-/* global document, window, URL */
+/* global document, window */
 
 import { spawn } from 'node:child_process';
-import { createServer } from 'node:http';
 import { copyFile, mkdir, readFile, stat } from 'node:fs/promises';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 
 import { makeBrowserCommander } from 'browser-commander';
 import { chromium } from 'playwright';
+
+import { startStaticServer } from './lib/static-server.mjs';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const repoRoot = path.resolve(__dirname, '..');
@@ -53,18 +54,6 @@ const LOCALES = [
   { locale: 'ru', contextLocale: 'ru-RU' },
 ];
 const THEMES = ['light', 'dark'];
-
-const contentTypes = new Map([
-  ['.css', 'text/css; charset=utf-8'],
-  ['.html', 'text/html; charset=utf-8'],
-  ['.js', 'text/javascript; charset=utf-8'],
-  ['.json', 'application/json; charset=utf-8'],
-  ['.map', 'application/json; charset=utf-8'],
-  ['.png', 'image/png'],
-  ['.svg', 'image/svg+xml'],
-  ['.woff', 'font/woff'],
-  ['.woff2', 'font/woff2'],
-]);
 
 function log(message) {
   console.log(`[preview] ${message}`);
@@ -124,58 +113,6 @@ async function ensureExampleAppBuild() {
     });
   }
   await runNpm(['run', 'build'], exampleAppRoot);
-}
-
-async function createStaticServer(rootDir) {
-  const root = path.resolve(rootDir);
-
-  const server = createServer(async (request, response) => {
-    try {
-      const requestUrl = new URL(request.url ?? '/', 'http://127.0.0.1');
-      const pathname =
-        requestUrl.pathname === '/' ? '/index.html' : requestUrl.pathname;
-      const requestedPath = path.resolve(
-        root,
-        `.${decodeURIComponent(pathname)}`
-      );
-
-      if (
-        requestedPath !== root &&
-        !requestedPath.startsWith(`${root}${path.sep}`)
-      ) {
-        response.writeHead(403);
-        response.end('Forbidden');
-        return;
-      }
-
-      const fileStat = await stat(requestedPath);
-      const filePath = fileStat.isDirectory()
-        ? path.join(requestedPath, 'index.html')
-        : requestedPath;
-      const body = await readFile(filePath);
-      const contentType =
-        contentTypes.get(path.extname(filePath)) ?? 'application/octet-stream';
-
-      response.writeHead(200, { 'content-type': contentType });
-      response.end(body);
-    } catch {
-      response.writeHead(404);
-      response.end('Not found');
-    }
-  });
-
-  await new Promise((resolve, reject) => {
-    server.once('error', reject);
-    server.listen(0, '127.0.0.1', resolve);
-  });
-
-  const address = server.address();
-  const url = `http://127.0.0.1:${address.port}/`;
-
-  return {
-    url,
-    close: () => new Promise((resolve) => server.close(resolve)),
-  };
 }
 
 function pngDimensions(buffer) {
@@ -300,7 +237,9 @@ async function main() {
     await ensureExampleAppBuild();
   }
 
-  const server = await createStaticServer(exampleAppDistDir);
+  const server = await startStaticServer({
+    mounts: [{ prefix: '/', dir: exampleAppDistDir }],
+  });
   log(`example-app server: ${server.url}`);
 
   const browser = await chromium.launch({

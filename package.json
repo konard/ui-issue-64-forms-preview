@@ -9,6 +9,10 @@
   ],
   "scripts": {
     "test": "node --test --test-timeout=30000 tests/*.test.js packages/*/tests/*.test.js",
+    "test:ui": "playwright test",
+    "test:ui:update": "playwright test --update-snapshots",
+    "test:ui:docker": "docker run --rm -v \"$PWD\":/work -w /work -e CI=1 mcr.microsoft.com/playwright:v1.59.1-noble sh -c 'npm ci && npx playwright test'",
+    "check:playwright": "node scripts/check-playwright-version.mjs",
     "lint": "node scripts/lint.mjs",
     "lint:all": "eslint .",
     "lint:fix": "eslint . --fix",
@@ -55,8 +59,11 @@
     "node": ">=20.10.0"
   },
   "devDependencies": {
+    "@axe-core/playwright": "4.14.0",
     "@changesets/cli": "^3.0.3",
     "@eslint/js": "^10.0.1",
+    "@playwright/test": "1.59.1",
+    "axe-core": "4.14.0",
     "command-stream": "2.4.0",
     "eslint": "^10.13.0",
     "eslint-config-prettier": "^10.1.8",

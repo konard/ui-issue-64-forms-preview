@@ -1,0 +1,90 @@
+name: UI tests
+
+# Visual regression (toHaveScreenshot) and WCAG 2.2 A/AA (axe-core) tests.
+# See docs/testing-ui.md. Issue: #13.
+on:
+  pull_request:
+  push:
+    branches: [main]
+  workflow_dispatch:
+    inputs:
+      update-snapshots:
+        description: Regenerate screenshot baselines and upload them as an artifact
+        type: boolean
+        default: false
+
+permissions:
+  contents: read
+
+jobs:
+  ui-tests:
+    name: UI tests (Playwright + axe)
+    runs-on: ubuntu-24.04
+    container:
+      # Same image digest as preview-regen in example-app.yml. Keep the tag
+      # comment equal to the @playwright/test pin in package.json
+      # (scripts/check-playwright-version.mjs enforces it).
+      image: mcr.microsoft.com/playwright@sha256:b0ab6f3cb99aa7803adbc14d9027ec1785fc6e433b97e134e0f8fe61683b6b53 # v1.59.1-noble
+    timeout-minutes: 20
+    concurrency:
+      group: check-${{ github.workflow }}-${{ github.ref }}-ui-tests
+      cancel-in-progress: true
+    env:
+      PLAYWRIGHT_BROWSERS_PATH: /ms-playwright
+      PLAYWRIGHT_SKIP_BROWSER_DOWNLOAD: '1'
+      UPDATE_SNAPSHOTS: ${{ github.event_name == 'workflow_dispatch' && inputs.update-snapshots }}
+    # Container jobs run `run:` blocks with sh, which has no [[ ]].
+    defaults:
+      run:
+        shell: bash
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+        with:
+          persist-credentials: false
+
+      # The container user (root) does not own the runner's workspace.
+      - name: Trust the checkout
+        run: git config --global --add safe.directory "$GITHUB_WORKSPACE"
+
+      - name: Check Playwright version pins
+        run: node scripts/check-playwright-version.mjs
+
+      - name: Install dependencies
+        run: npm ci --no-audit --no-fund
+
+      - name: Install example app dependencies
+        run: npm ci --prefix examples/universal-app --no-audit --no-fund
+
+      - name: Build example app
+        run: npm run example:web:build
+
+      - name: Run Playwright tests
+        if: env.UPDATE_SNAPSHOTS != 'true'
+        run: npx playwright test
+
+      - name: Update screenshot baselines
+        if: env.UPDATE_SNAPSHOTS == 'true'
+        run: npx playwright test --update-snapshots
+
+      - name: Upload test report and diffs
+        if: failure()
+        uses: ./.github/actions/artifact-transport
+        with:
+          name: ui-tests-failure-${{ github.run_id }}-${{ github.run_attempt }}
+          path: |
+            playwright-report/
+            test-results/
+          retention-days: 7
+          if-no-files-found: error
+
+      # A human downloads this artifact and commits it; the job never pushes.
+      - name: Upload updated baselines
+        if: env.UPDATE_SNAPSHOTS == 'true'
+        uses: ./.github/actions/artifact-transport
+        with:
+          name: ui-screenshots-${{ github.run_id }}
+          path: |
+            tests/ui/__screenshots__/**
+            packages/*/e2e/__screenshots__/**
+          retention-days: 7
+          if-no-files-found: error

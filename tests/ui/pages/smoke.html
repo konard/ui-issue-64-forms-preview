@@ -1,0 +1,74 @@
+<!doctype html>
+<html lang="en" data-theme="light">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>UI test smoke page</title>
+    <style>
+      :root {
+        --bg: #ffffff;
+        --fg: #1a1a1a;
+        --accent: #0b57d0;
+        --accent-fg: #ffffff;
+        --border: #5f6368;
+      }
+      :root[data-theme='dark'] {
+        --bg: #121212;
+        --fg: #f1f1f1;
+        --accent: #a8c7fa;
+        --accent-fg: #062e6f;
+        --border: #9aa0a6;
+      }
+      body {
+        margin: 0;
+        padding: 32px;
+        background: var(--bg);
+        color: var(--fg);
+        font: 16px/1.5 sans-serif;
+      }
+      label {
+        display: block;
+        margin-bottom: 8px;
+      }
+      input {
+        padding: 8px;
+        border: 1px solid var(--border);
+        background: var(--bg);
+        color: var(--fg);
+        font: inherit;
+      }
+      button {
+        margin-left: 8px;
+        padding: 8px 16px;
+        border: 0;
+        background: var(--accent);
+        color: var(--accent-fg);
+        font: inherit;
+      }
+    </style>
+  </head>
+  <body>
+    <main>
+      <h1 data-i18n="title">Hello, world</h1>
+      <form onsubmit="return false;">
+        <label for="name" data-i18n="label">Your name</label>
+        <input id="name" name="name" type="text" />
+        <button type="submit" data-i18n="submit">Send</button>
+      </form>
+    </main>
+    <script>
+      const messages = {
+        en: { title: 'Hello, world', label: 'Your name', submit: 'Send' },
+        ru: { title: 'Привет, мир', label: 'Ваше имя', submit: 'Отправить' },
+      };
+      /** Test hook: switch theme and locale. */
+      window.setUi = ({ theme, locale }) => {
+        document.documentElement.dataset.theme = theme;
+        document.documentElement.lang = locale;
+        for (const el of document.querySelectorAll('[data-i18n]')) {
+          el.textContent = messages[locale][el.dataset.i18n];
+        }
+      };
+    </script>
+  </body>
+</html>
