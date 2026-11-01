@@ -15,6 +15,8 @@
     "format": "prettier --write .",
     "format:check": "prettier --check .",
     "check:duplication": "jscpd .",
+    "check:assets": "node scripts/check-assets.mjs",
+    "assets:attributions": "node scripts/render-attributions.mjs",
     "check": "npm run lint && npm run format:check && npm run check:duplication",
     "example:web:dev": "npm --prefix examples/universal-app run dev",
     "example:web:build": "npm --prefix examples/universal-app run build",
