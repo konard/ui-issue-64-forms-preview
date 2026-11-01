@@ -1,0 +1,1 @@
+(draft: text (bind value (param draft.text)))

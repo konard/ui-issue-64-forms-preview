@@ -1,0 +1,39 @@
+{
+  "spec": "ui-dialect/0",
+  "elements": [
+    {
+      "id": "list",
+      "kind": "stack",
+      "positional": [],
+      "properties": [],
+      "children": [
+        {
+          "id": null,
+          "kind": "text",
+          "positional": ["First"],
+          "properties": [],
+          "children": [],
+          "unknown": []
+        },
+        {
+          "id": null,
+          "kind": "text",
+          "positional": ["Second"],
+          "properties": [],
+          "children": [],
+          "unknown": []
+        },
+        {
+          "id": "separator",
+          "kind": "text",
+          "positional": ["-"],
+          "properties": [],
+          "children": [],
+          "unknown": []
+        }
+      ],
+      "unknown": []
+    }
+  ],
+  "diagnostics": []
+}

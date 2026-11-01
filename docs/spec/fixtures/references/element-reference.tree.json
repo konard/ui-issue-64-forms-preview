@@ -1,0 +1,44 @@
+{
+  "spec": "ui-dialect/0",
+  "elements": [
+    {
+      "id": "hello",
+      "kind": "text",
+      "positional": ["Hello"],
+      "properties": [],
+      "children": [],
+      "unknown": []
+    },
+    {
+      "id": "wave",
+      "kind": "animation",
+      "positional": [],
+      "properties": [
+        {
+          "name": "target",
+          "values": ["hello"]
+        },
+        {
+          "name": "duration",
+          "values": ["300ms"]
+        }
+      ],
+      "children": [],
+      "unknown": []
+    },
+    {
+      "id": "nav",
+      "kind": "button",
+      "positional": ["Next"],
+      "properties": [
+        {
+          "name": "on",
+          "values": ["press", ["navigate", "hello"], ["focus", "hello"]]
+        }
+      ],
+      "children": [],
+      "unknown": []
+    }
+  ],
+  "diagnostics": []
+}

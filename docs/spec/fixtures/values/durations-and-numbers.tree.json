@@ -1,0 +1,49 @@
+{
+  "spec": "ui-dialect/0",
+  "elements": [
+    {
+      "id": "pop",
+      "kind": "animation",
+      "positional": [],
+      "properties": [
+        {
+          "name": "duration",
+          "values": ["150ms"]
+        },
+        {
+          "name": "delay",
+          "values": ["0.2s"]
+        },
+        {
+          "name": "track",
+          "values": [
+            "scale",
+            ["key", "0", "1"],
+            ["key", "0.5", "1.5e0"],
+            ["key", "1", "-1"]
+          ]
+        }
+      ],
+      "children": [],
+      "unknown": []
+    },
+    {
+      "id": "dim",
+      "kind": "style",
+      "positional": [],
+      "properties": [
+        {
+          "name": "opacity",
+          "values": ["0.5"]
+        },
+        {
+          "name": "elevation",
+          "values": ["2"]
+        }
+      ],
+      "children": [],
+      "unknown": []
+    }
+  ],
+  "diagnostics": []
+}

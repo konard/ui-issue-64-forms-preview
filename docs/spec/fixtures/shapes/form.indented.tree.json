@@ -1,0 +1,45 @@
+{
+  "spec": "ui-dialect/0",
+  "elements": [
+    {
+      "id": "form",
+      "kind": "stack",
+      "positional": [],
+      "properties": [
+        {
+          "name": "direction",
+          "values": ["vertical"]
+        },
+        {
+          "name": "gap",
+          "values": ["8px"]
+        }
+      ],
+      "children": [
+        {
+          "id": "title",
+          "kind": "text",
+          "positional": ["Sign in"],
+          "properties": [],
+          "children": [],
+          "unknown": []
+        },
+        {
+          "id": "save",
+          "kind": "button",
+          "positional": ["Save"],
+          "properties": [
+            {
+              "name": "on",
+              "values": ["press", ["emit", "save"], ["navigate", "home"]]
+            }
+          ],
+          "children": [],
+          "unknown": []
+        }
+      ],
+      "unknown": []
+    }
+  ],
+  "diagnostics": []
+}

@@ -1,0 +1,1 @@
+(fade: animation (target ok) (duration 200ms) (track opacity (key 0 0) (key 1 1)))

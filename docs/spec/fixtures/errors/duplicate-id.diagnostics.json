@@ -1,0 +1,12 @@
+{
+  "spec": "ui-dialect/0",
+  "diagnostics": [
+    {
+      "code": "duplicate-id",
+      "severity": "error",
+      "at": {
+        "element": "a"
+      }
+    }
+  ]
+}

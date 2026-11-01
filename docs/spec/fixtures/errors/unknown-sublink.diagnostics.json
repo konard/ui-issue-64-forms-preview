@@ -1,0 +1,13 @@
+{
+  "spec": "ui-dialect/0",
+  "diagnostics": [
+    {
+      "code": "unknown-sublink",
+      "severity": "warning",
+      "at": {
+        "element": "ok",
+        "head": "colour"
+      }
+    }
+  ]
+}

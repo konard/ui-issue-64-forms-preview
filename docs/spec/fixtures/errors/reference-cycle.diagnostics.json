@@ -1,0 +1,23 @@
+{
+  "spec": "ui-dialect/0",
+  "diagnostics": [
+    {
+      "code": "reference-cycle",
+      "severity": "error",
+      "at": {
+        "element": "loop",
+        "property": "token",
+        "token": "a"
+      }
+    },
+    {
+      "code": "reference-cycle",
+      "severity": "error",
+      "at": {
+        "element": "loop",
+        "property": "token",
+        "token": "b"
+      }
+    }
+  ]
+}

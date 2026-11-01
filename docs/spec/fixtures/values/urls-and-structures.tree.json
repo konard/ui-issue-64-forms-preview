@@ -1,0 +1,40 @@
+{
+  "spec": "ui-dialect/0",
+  "elements": [
+    {
+      "id": "logo",
+      "kind": "image",
+      "positional": ["https://example.com/logo.svg"],
+      "properties": [
+        {
+          "name": "alt",
+          "values": ["Logo"]
+        },
+        {
+          "name": "aspect",
+          "values": ["16", "9"]
+        }
+      ],
+      "children": [],
+      "unknown": []
+    },
+    {
+      "id": "narrow",
+      "kind": "style",
+      "positional": [],
+      "properties": [
+        {
+          "name": "media",
+          "values": [["max-width", "640px"]]
+        },
+        {
+          "name": "state",
+          "values": ["hover", ["opacity", "0.8"]]
+        }
+      ],
+      "children": [],
+      "unknown": []
+    }
+  ],
+  "diagnostics": []
+}

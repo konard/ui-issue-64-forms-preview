@@ -1,0 +1,69 @@
+{
+  "spec": "ui-dialect/0",
+  "elements": [
+    {
+      "id": "bad",
+      "kind": "stack",
+      "positional": [],
+      "properties": [
+        {
+          "name": "gap",
+          "values": ["16pt"]
+        },
+        {
+          "name": "direction",
+          "values": ["diagonal"]
+        }
+      ],
+      "children": [],
+      "unknown": []
+    },
+    {
+      "id": "late",
+      "kind": "animation",
+      "positional": [],
+      "properties": [
+        {
+          "name": "duration",
+          "values": ["2", "seconds"]
+        }
+      ],
+      "children": [],
+      "unknown": []
+    }
+  ],
+  "diagnostics": [
+    {
+      "code": "invalid-value",
+      "severity": "error",
+      "at": {
+        "element": "bad",
+        "property": "gap"
+      }
+    },
+    {
+      "code": "invalid-value",
+      "severity": "error",
+      "at": {
+        "element": "bad",
+        "property": "direction"
+      }
+    },
+    {
+      "code": "invalid-value",
+      "severity": "error",
+      "at": {
+        "element": "late",
+        "property": "duration"
+      }
+    },
+    {
+      "code": "invalid-value",
+      "severity": "error",
+      "at": {
+        "element": "late",
+        "property": "duration"
+      }
+    }
+  ]
+}

@@ -1,0 +1,56 @@
+{
+  "spec": "ui-dialect/0",
+  "elements": [
+    {
+      "id": "lucide-check",
+      "kind": "asset",
+      "positional": [],
+      "properties": [
+        {
+          "name": "kind",
+          "values": ["icon"]
+        },
+        {
+          "name": "source",
+          "values": ["https://lucide.dev/icons/check"]
+        },
+        {
+          "name": "license",
+          "values": ["ISC"]
+        },
+        {
+          "name": "copyright",
+          "values": ["Lucide Contributors"]
+        },
+        {
+          "name": "notice",
+          "values": ["https://github.com/lucide-icons/lucide/blob/main/LICENSE"]
+        }
+      ],
+      "children": [],
+      "unknown": []
+    },
+    {
+      "id": "links-ui-logo",
+      "kind": "asset",
+      "positional": [],
+      "properties": [
+        {
+          "name": "kind",
+          "values": ["image"]
+        },
+        {
+          "name": "license",
+          "values": ["CC0-1.0"]
+        },
+        {
+          "name": "copyright",
+          "values": ["none"]
+        }
+      ],
+      "children": [],
+      "unknown": []
+    }
+  ],
+  "diagnostics": []
+}

@@ -1,0 +1,13 @@
+{
+  "spec": "ui-dialect/0",
+  "diagnostics": [
+    {
+      "code": "syntax-error",
+      "severity": "error",
+      "at": {
+        "line": 1,
+        "column": 19
+      }
+    }
+  ]
+}
