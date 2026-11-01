@@ -194,7 +194,8 @@ export function renderAll() {
   return Promise.all(
     targets.map(async ([file, name, table]) => {
       const path = join(guidelinesDir, file);
-      const actual = readFileSync(path, 'utf8');
+      // Normalise CRLF so Windows checkouts compare equal to LF output.
+      const actual = readFileSync(path, 'utf8').replaceAll('\r\n', '\n');
       const options = (await prettier.resolveConfig(path)) ?? {};
       const expected = await prettier.format(
         replaceGenerated(actual, name, table),
