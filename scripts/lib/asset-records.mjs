@@ -480,7 +480,10 @@ function annotation(path, copyright, license) {
  * @returns {{stale: boolean}}
  */
 export function syncGeneratedFile(path, expected, { write }) {
-  const actual = existsSync(path) ? readFileSync(path, 'utf8') : null;
+  // Git may check text files out with CRLF (core.autocrlf on Windows).
+  const actual = existsSync(path)
+    ? readFileSync(path, 'utf8').replace(/\r\n/g, '\n')
+    : null;
   const stale = actual !== expected;
   if (stale && write) {
     writeFileSync(path, expected);

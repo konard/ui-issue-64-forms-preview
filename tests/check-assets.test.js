@@ -10,7 +10,7 @@ import {
 } from 'node:fs';
 import { tmpdir } from 'node:os';
 import { dirname, join } from 'node:path';
-import { URL } from 'node:url';
+import { URL, fileURLToPath } from 'node:url';
 import { checkAssets } from '../scripts/check-assets.mjs';
 import { updateAttributions } from '../scripts/render-attributions.mjs';
 
@@ -55,8 +55,9 @@ test('the CLI exits 1 and names the file without a record', (t) => {
     'assets/links-ui-logo.svg': '<svg/>',
   });
   t.after(() => rmSync(root, { recursive: true, force: true }));
-  const script = new URL('../scripts/check-assets.mjs', import.meta.url)
-    .pathname;
+  const script = fileURLToPath(
+    new URL('../scripts/check-assets.mjs', import.meta.url)
+  );
   const run = (...args) =>
     spawnSync(process.execPath, [script, '--root', root, ...args], {
       encoding: 'utf8',
@@ -66,6 +67,15 @@ test('the CLI exits 1 and names the file without a record', (t) => {
   const result = run();
   assert.equal(result.status, 1);
   assert.match(result.stderr, /assets\/tmp.svg/);
+});
+
+test('generated files with CRLF line endings are not stale', (t) => {
+  const root = fixture({ 'assets/assets.lino': OWN });
+  t.after(() => rmSync(root, { recursive: true, force: true }));
+  updateAttributions(root);
+  const path = join(root, 'assets/ATTRIBUTIONS.md');
+  writeFileSync(path, readFileSync(path, 'utf8').replace(/\n/g, '\r\n'));
+  assert.equal(updateAttributions(root, { check: true }).stale, false);
 });
 
 test('render-attributions --check reports a stale ATTRIBUTIONS.md', (t) => {
@@ -83,7 +93,7 @@ test('render-attributions --check reports a stale ATTRIBUTIONS.md', (t) => {
 });
 
 test('the repository itself passes both checks', () => {
-  const root = new URL('..', import.meta.url).pathname;
+  const root = fileURLToPath(new URL('..', import.meta.url));
   assert.deepEqual(checkAssets(root).errors, []);
   assert.equal(updateAttributions(root, { check: true }).stale, false);
 });
