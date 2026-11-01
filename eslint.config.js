@@ -105,7 +105,7 @@ export default [
   },
   {
     // Test files have different requirements
-    files: ['tests/**/*.js', '**/*.test.js'],
+    files: ['tests/**/*.js', 'packages/*/tests/**/*.js', '**/*.test.js'],
     rules: {
       'require-await': 'off', // Async functions without await are common in tests
     },

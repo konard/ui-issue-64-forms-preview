@@ -86,15 +86,14 @@ npm run example:desktop:package
 ├── examples/             # Usage examples
 │   └── universal-app/    # React + GitHub Pages + Electron + Capacitor app
 ├── scripts/              # Build and release scripts
-├── src/                  # Source code
-│   ├── index.js          # Main entry point
-│   └── index.d.ts        # TypeScript definitions
-├── tests/                # Test files
+├── packages/             # npm workspaces (see docs/monorepo.md)
+│   └── ui-core/          # @link-foundation/ui-core
+├── tests/                # Repository and release-script tests
 ├── .eslintrc.js          # ESLint configuration
 ├── .prettierrc           # Prettier configuration
 ├── bunfig.toml           # Bun configuration
 ├── deno.json             # Deno configuration
-└── package.json          # Node.js package manifest
+└── package.json          # Private npm workspaces root
 ```
 
 ## Design Choices
@@ -124,7 +123,7 @@ Note: `package-lock.json` is not committed by default to allow any package manag
 ### Universal App Example
 
 The repository includes `examples/universal-app`, a Vite React app that imports
-`version` from `src/index.js` and renders it in a visual UI.
+`UI_DIALECT_VERSION` from `@link-foundation/ui-core` (`packages/ui-core`) and renders it in a visual UI.
 The same static build is used by:
 
 - GitHub Pages (`npm run example:web:build`)

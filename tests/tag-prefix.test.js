@@ -8,8 +8,16 @@ import { describe, it, expect } from 'test-anywhere';
 import { buildReleaseTag } from '../scripts/release-naming.mjs';
 
 describe('tag prefix logic', () => {
-  it('defaults to "v" prefix (backward compatible)', () => {
-    expect(buildReleaseTag('1.0.0', { jsRoot: '.' })).toBe('v1.0.0');
+  it('defaults to "v" prefix for a single-package root (backward compatible)', () => {
+    expect(buildReleaseTag('1.0.0', { jsRoot: '.', workspace: false })).toBe(
+      'v1.0.0'
+    );
+  });
+
+  it('defaults to "<package>@" in the npm workspaces root', () => {
+    expect(buildReleaseTag('1.0.0', { jsRoot: '.' })).toBe(
+      '@link-foundation/ui-core@1.0.0'
+    );
   });
 
   it('auto-detects "js_v" prefix for multi-language repos', () => {

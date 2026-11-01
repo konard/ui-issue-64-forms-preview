@@ -70,6 +70,13 @@ npm test
 deno test -A --parallel
 ```
 
+## Monorepo Layout
+
+The repository root is a private npm workspaces monorepo. Publishable code
+lives in `packages/*`, starting with `@link-foundation/ui-core`. See
+[docs/monorepo.md](monorepo.md) for the layout, how to add a package, naming,
+versioning and changesets.
+
 ## Version Management with Changesets
 
 This project uses [Changesets](https://github.com/changesets/changesets) to manage versions and changelogs. This eliminates merge conflicts that occur when multiple PRs bump the version in `package.json`.

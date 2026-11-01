@@ -1,3 +1,15 @@
-# Only maintained tests participate in the runtime matrix.
+# Only maintained tests participate in the runtime matrix: `tests/` and
+# `packages/*/tests/`. There is no single `root` (Bun accepts only one), so
+# Bun discovers `*.test.js` from the repository root and the patterns below
+# keep archives, examples and generated output out. Bun always skips
+# `node_modules/`.
 [test]
-root = "./tests"
+pathIgnorePatterns = [
+  "**/dist/**",
+  "**/build/**",
+  "**/coverage/**",
+  "dev/**",
+  "docs/**",
+  "examples/**",
+  "experiments/**",
+]

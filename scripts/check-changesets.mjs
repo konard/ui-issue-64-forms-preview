@@ -22,7 +22,7 @@ import { join } from 'node:path';
 import { getChangesetDir, getJsRoot, parseJsRootConfig } from './js-paths.mjs';
 import {
   getChangesetVersionTypeRegex,
-  readPackageInfo,
+  readReleasePackages,
 } from './package-info.mjs';
 
 /**
@@ -79,27 +79,40 @@ function hasValidChangesetFrontmatter(filePath, versionTypeRegex) {
 }
 
 /**
- * Count changeset files in the .changeset directory
+ * Count changeset files in the .changeset directory per release package.
+ * A changeset that names several packages counts once for each of them and
+ * once in the total.
  * @param {string} changesetDir
- * @param {string} packageName
- * @returns {number} Number of changeset files found
+ * @param {string[]} packageNames
+ * @returns {{total: number, perPackage: Map<string, number>}}
  */
-function countChangesetFiles(changesetDir, packageName) {
+function countChangesetFiles(changesetDir, packageNames) {
+  const perPackage = new Map(packageNames.map((name) => [name, 0]));
   if (!existsSync(changesetDir)) {
-    return 0;
+    return { total: 0, perPackage };
   }
 
-  const versionTypeRegex = getChangesetVersionTypeRegex(packageName, {
-    requireQuotes: false,
-  });
-  const files = readdirSync(changesetDir);
-  const changesetFiles = files.filter(
-    (file) =>
-      isMarkdownChangesetCandidate(file) &&
-      hasValidChangesetFrontmatter(join(changesetDir, file), versionTypeRegex)
-  );
+  const regexes = packageNames.map((name) => [
+    name,
+    getChangesetVersionTypeRegex(name, { requireQuotes: false }),
+  ]);
+  let total = 0;
+  for (const file of readdirSync(changesetDir)) {
+    if (!isMarkdownChangesetCandidate(file)) {
+      continue;
+    }
+    const named = regexes.filter(([, regex]) =>
+      hasValidChangesetFrontmatter(join(changesetDir, file), regex)
+    );
+    for (const [name] of named) {
+      perPackage.set(name, perPackage.get(name) + 1);
+    }
+    if (named.length > 0) {
+      total += 1;
+    }
+  }
 
-  return changesetFiles.length;
+  return { total, perPackage };
 }
 
 /**
@@ -111,17 +124,22 @@ function checkChangesets() {
   const jsRootConfig = parseJsRootConfig();
   const jsRoot = getJsRoot({ jsRoot: jsRootConfig, verbose: true });
   const changesetDir = getChangesetDir({ jsRoot });
-  const { name: packageName } = readPackageInfo({ jsRoot });
+  const packageNames = readReleasePackages({ jsRoot }).map((pkg) => pkg.name);
 
-  console.log(`Package: ${packageName}`);
+  console.log(`Packages: ${packageNames.join(', ')}`);
   console.log(`Changeset directory: ${changesetDir}`);
 
-  const changesetCount = countChangesetFiles(changesetDir, packageName);
+  const { total, perPackage } = countChangesetFiles(changesetDir, packageNames);
 
-  console.log(`Found ${changesetCount} changeset file(s)`);
+  if (packageNames.length > 1) {
+    for (const [name, count] of perPackage) {
+      console.log(`  ${name}: ${count} changeset file(s)`);
+    }
+  }
+  console.log(`Found ${total} changeset file(s)`);
 
-  setOutput('has_changesets', changesetCount > 0 ? 'true' : 'false');
-  setOutput('changeset_count', String(changesetCount));
+  setOutput('has_changesets', total > 0 ? 'true' : 'false');
+  setOutput('changeset_count', String(total));
 }
 
 // Run the check

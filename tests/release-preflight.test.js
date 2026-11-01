@@ -422,16 +422,16 @@ describe('npm OIDC package exchange regression', () => {
     [
       404,
       [
-        'npm has no package @link-foundation/ui yet',
+        'npm has no package @link-foundation/ui-core yet',
         'Add an NPM_TOKEN repository secret',
         'https://github.com/acme/widget/settings/secrets/actions',
-        'add a trusted publisher for acme/widget, workflow release.yml, at https://www.npmjs.com/package/@link-foundation/ui/access',
+        'add a trusted publisher for acme/widget, workflow release.yml, at https://www.npmjs.com/package/@link-foundation/ui-core/access',
       ],
     ],
     [
       200,
       [
-        'npm rejected the OIDC exchange for @link-foundation/ui (404): add a trusted publisher for acme/widget',
+        'npm rejected the OIDC exchange for @link-foundation/ui-core (404): add a trusted publisher for acme/widget',
       ],
     ],
     ['000', ['the package lookup answered 000']],

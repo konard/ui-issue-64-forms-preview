@@ -20,11 +20,11 @@ import { readFileSync, appendFileSync, readdirSync } from 'fs';
 
 import {
   getJsRoot,
-  getPackageJsonPath,
   getChangesetDir,
   needsCd,
   parseJsRootConfig,
 } from './js-paths.mjs';
+import { readPackageInfo } from './package-info.mjs';
 import { bootstrapDependencies } from './bootstrap-dependencies.mjs';
 import { loadCommandStream, loadLinoArguments } from './use-module.mjs';
 import { printUntrusted } from './github-actions-log.mjs';
@@ -164,7 +164,10 @@ function countChangesets() {
  * @param {string} source - 'local' or 'remote'
  */
 async function getVersion(source = 'local') {
-  const packageJsonPath = getPackageJsonPath({ jsRoot });
+  // In an npm workspaces root this is the release package's manifest.
+  const packageJsonPath = readPackageInfo({ jsRoot })
+    .packageJsonPath.replaceAll('\\', '/')
+    .replace(/^\.\//, '');
   if (source === 'remote') {
     const result = await $`git show origin/main:${packageJsonPath}`.run({
       capture: true,
