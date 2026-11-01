@@ -15,6 +15,38 @@ This folder is the source of every GitHub issue that issue #1 asked for
   `{{KEY}}` references to `#number`, adds the "blocked by" relations with the
   GitHub issue dependencies API, attaches every issue as a sub-issue of the
   tracking issue, and generates [`../../../ROADMAP.md`](../../../ROADMAP.md).
+- [`../../../../experiments/issue-1/verify-roadmap-issues.mjs`](../../../../experiments/issue-1/verify-roadmap-issues.mjs)
+  reads the created issues back from GitHub and compares title, type, labels,
+  "blocked by" relations and sub-issues with the source files.
+- [`logs/`](logs/) keeps the output of the creation runs and of the
+  verification.
+
+## Created issues
+
+On 2026-11-01 the script created 73 issues:
+
+- the 6 bugs B01–B06 as
+  [#3](https://github.com/link-foundation/ui/issues/3)–[#8](https://github.com/link-foundation/ui/issues/8)
+  (type `Bug`, label `bug`);
+- the 66 features F01–F66 as
+  [#9](https://github.com/link-foundation/ui/issues/9)–[#74](https://github.com/link-foundation/ui/issues/74)
+  (type `Feature`, label `enhancement`);
+- the tracking task T01 as
+  [#75](https://github.com/link-foundation/ui/issues/75) (type `Task`), with
+  the other 72 issues as its sub-issues.
+
+The issues are connected by 102 native "blocked by" relations.
+[`ROADMAP.md`](../../../ROADMAP.md) lists them by phase.
+
+The first run stopped at the 10-minute limit of the shell session while it
+was adding sub-issues ([`logs/create-roadmap-issues-run1.log`](logs/create-roadmap-issues-run1.log)).
+The script is idempotent, so the second run skipped what existed and finished
+the sub-issues ([`logs/create-roadmap-issues-run2.log`](logs/create-roadmap-issues-run2.log)).
+The verification found no difference between GitHub and the source files
+([`logs/verify-roadmap-issues.log`](logs/verify-roadmap-issues.log)).
+
+To add an issue later, add a file to `issues/`, a row to the plan below, and
+run the script again. It creates only the missing issues and relations.
 
 ## Rules used to cut the issues
 

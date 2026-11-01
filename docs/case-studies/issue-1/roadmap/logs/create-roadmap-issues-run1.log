@@ -1,0 +1,276 @@
+73 roadmap issue files are valid.
+created B01 -> #3 Repository still identifies itself as the JavaScript template
+created B02 -> #4 Inherited template case studies and analyses collide with our issue numbers
+created B03 -> #5 Example app deploy fails on main because GitHub Pages is not enabled
+created B04 -> #6 Preview image regeneration fails on main: `gh` is missing in the Playwright container
+created B05 -> #7 Release preflight fails on main: no npm package and no `NPM_TOKEN`
+created B06 -> #8 Security workflow fails on main because the dependency graph is disabled
+created F01 -> #9 Monorepo workspace for the framework packages
+created F02 -> #10 Licensing and third-party asset records (REUSE, SPDX, CI)
+created F03 -> #11 UI dialect specification v0 with conformance fixtures
+created F04 -> #12 Design guidelines digest: Material 3, Fluent 2, Apple HIG, ARIA
+created F05 -> #13 Visual regression and accessibility test infrastructure
+created F06 -> #14 ui-core: parse Links Notation into the UI element tree
+created F07 -> #15 ui-core: typed values, units, colours and references
+created F08 -> #16 ui-store: links network store with stable IDs and undo/redo
+created F09 -> #17 ui-store: IndexedDB persistence compatible with doublets-web
+created F10 -> #18 ui-config: layered configuration and override patches
+created F11 -> #19 ui-tokens: design tokens in LiNo with CSS, DTCG, Swift, Kotlin output
+created F12 -> #20 ui-style: style rules, states and responsive conditions
+created F13 -> #21 ui-i18n: localisation with lino-i18n
+created F14 -> #22 Source-preserving LiNo edits (comments and layout kept)
+created F15 -> #23 Settings schema engine: validation, presets, diff-only sharing
+created F16 -> #24 ui-dom: reference DOM renderer with custom elements
+created F17 -> #25 HTML/DOM to LiNo importer
+created F18 -> #26 ui-react: React adapter
+created F19 -> #27 ui-vue: Vue adapter
+created F20 -> #28 ui-react-native: React Native renderer
+created F21 -> #29 Swift Links Notation parser
+created F22 -> #30 ui-swift: SwiftUI renderer
+created F23 -> #31 Kotlin Links Notation parser
+created F24 -> #32 ui-kotlin: Jetpack Compose renderer
+created F25 -> #33 Behaviour state machines, actions registry and accessibility
+created F26 -> #34 Basic controls
+created F27 -> #35 Overlays and navigation (dialog, popover, menu, tabs, toast, radial menu)
+created F28 -> #36 Layout and windowing (stack, grid, split panes, docking, windows)
+created F29 -> #37 Data display: lists, trees, tables, virtualisation
+created F30 -> #38 Chat UI kit (from meta-sovereign and formal-ai)
+created F31 -> #39 Charts
+created F32 -> #40 Diagrams (Mermaid and LiNo diagrams)
+created F33 -> #41 Single link visualisation (from links-visuals)
+created F34 -> #42 Links network visualisation (layouts, interaction, worker)
+created F35 -> #43 Universal Links Notation to network visualisation converter
+created F36 -> #44 Icons and asset pipeline
+created F37 -> #45 Settings panel generated from the settings schema
+created F38 -> #46 Code and LiNo text editor component
+created F39 -> #47 Theme engine: nested themes, colour schemes, contrast, motion
+created F40 -> #48 Material 3 theme and MUI mapping
+created F41 -> #49 Fluent 2 theme
+created F42 -> #50 Apple HIG theme
+created F43 -> #51 Classic themes: deepcase versions, konard.github.io, formal-ai skins
+created F44 -> #52 ui-animation: animation model and player
+created F45 -> #53 Animation and interaction recorder, replay
+created F46 -> #54 Development/configuration mode inspector overlay
+created F47 -> #55 "Make these the defaults": agent hand-off and share links
+created F48 -> #56 WYSIWYG designer
+created F49 -> #57 Animation timeline editor
+created F50 -> #58 Development mode for pages not built with the framework
+created F51 -> #59 Importers: JSX, MUI and Vue single-file components via meta-language
+created F52 -> #60 Code exporters: React, Vue, SwiftUI and Compose source
+created F53 -> #61 Interop with A2UI, Adaptive Cards, JSON Forms and Lottie
+created F54 -> #62 Documentation and demo site built with the framework
+created F55 -> #63 Component gallery and live playground
+created F56 -> #64 Contributor guide and issue templates for AI agents
+created F57 -> #65 Migration playbook and MUI-to-framework mapping guide
+created F58 -> #66 Migrate konard.github.io
+created F59 -> #67 Migrate links-visuals
+created F60 -> #68 Migrate meta-sovereign chat
+created F61 -> #69 Migrate formal-ai
+created F62 -> #70 Migrate deepcase
+created F63 -> #71 Migrate anime-avatar
+created F64 -> #72 Migrate immortality
+created F65 -> #73 Migrate the remaining UI projects of our organisations
+created F66 -> #74 ui-sound: UI sound themes with Web Audio
+created T01 -> #75 Roadmap: associative UI framework
+updated B01 (#3)
+updated B02 (#4)
+updated B03 (#5)
+updated B04 (#6)
+updated B05 (#7)
+updated B06 (#8)
+updated F01 (#9)
+updated F02 (#10)
+updated F03 (#11)
+updated F04 (#12)
+updated F05 (#13)
+updated F06 (#14)
+updated F07 (#15)
+updated F08 (#16)
+updated F09 (#17)
+updated F10 (#18)
+updated F11 (#19)
+updated F12 (#20)
+updated F13 (#21)
+updated F14 (#22)
+updated F15 (#23)
+updated F16 (#24)
+updated F17 (#25)
+updated F18 (#26)
+updated F19 (#27)
+updated F20 (#28)
+updated F21 (#29)
+updated F22 (#30)
+updated F23 (#31)
+updated F24 (#32)
+updated F25 (#33)
+updated F26 (#34)
+updated F27 (#35)
+updated F28 (#36)
+updated F29 (#37)
+updated F30 (#38)
+updated F31 (#39)
+updated F32 (#40)
+updated F33 (#41)
+updated F34 (#42)
+updated F35 (#43)
+updated F36 (#44)
+updated F37 (#45)
+updated F38 (#46)
+updated F39 (#47)
+updated F40 (#48)
+updated F41 (#49)
+updated F42 (#50)
+updated F43 (#51)
+updated F44 (#52)
+updated F45 (#53)
+updated F46 (#54)
+updated F47 (#55)
+updated F48 (#56)
+updated F49 (#57)
+updated F50 (#58)
+updated F51 (#59)
+updated F52 (#60)
+updated F53 (#61)
+updated F54 (#62)
+updated F55 (#63)
+updated F56 (#64)
+updated F57 (#65)
+updated F58 (#66)
+updated F59 (#67)
+updated F60 (#68)
+updated F61 (#69)
+updated F62 (#70)
+updated F63 (#71)
+updated F64 (#72)
+updated F65 (#73)
+updated F66 (#74)
+updated T01 (#75)
+  #7 blocked by #3
+  #9 blocked by #3
+  #13 blocked by #9
+  #14 blocked by #9
+  #14 blocked by #11
+  #15 blocked by #14
+  #16 blocked by #14
+  #17 blocked by #16
+  #18 blocked by #16
+  #19 blocked by #15
+  #20 blocked by #15
+  #20 blocked by #19
+  #21 blocked by #18
+  #22 blocked by #14
+  #23 blocked by #18
+  #24 blocked by #16
+  #24 blocked by #20
+  #25 blocked by #14
+  #26 blocked by #24
+  #27 blocked by #24
+  #28 blocked by #26
+  #29 blocked by #11
+  #30 blocked by #29
+  #30 blocked by #19
+  #31 blocked by #11
+  #32 blocked by #31
+  #32 blocked by #19
+  #33 blocked by #24
+  #34 blocked by #33
+  #35 blocked by #33
+  #36 blocked by #24
+  #37 blocked by #33
+  #38 blocked by #34
+  #38 blocked by #37
+  #39 blocked by #24
+  #40 blocked by #24
+  #41 blocked by #24
+  #42 blocked by #41
+  #42 blocked by #16
+  #43 blocked by #42
+  #44 blocked by #10
+  #44 blocked by #24
+  #45 blocked by #23
+  #45 blocked by #34
+  #46 blocked by #34
+  #47 blocked by #19
+  #47 blocked by #20
+  #47 blocked by #34
+  #48 blocked by #47
+  #48 blocked by #12
+  #49 blocked by #47
+  #49 blocked by #12
+  #50 blocked by #47
+  #50 blocked by #12
+  #51 blocked by #47
+  #51 blocked by #36
+  #52 blocked by #20
+  #52 blocked by #24
+  #53 blocked by #52
+  #53 blocked by #16
+  #54 blocked by #18
+  #54 blocked by #24
+  #55 blocked by #54
+  #56 blocked by #54
+  #56 blocked by #36
+  #56 blocked by #34
+  #56 blocked by #22
+  #57 blocked by #56
+  #57 blocked by #53
+  #58 blocked by #54
+  #58 blocked by #25
+  #59 blocked by #25
+  #60 blocked by #26
+  #60 blocked by #27
+  #61 blocked by #14
+  #62 blocked by #5
+  #62 blocked by #24
+  #62 blocked by #34
+  #62 blocked by #47
+  #63 blocked by #62
+  #63 blocked by #54
+  #64 blocked by #9
+  #65 blocked by #34
+  #65 blocked by #47
+  #66 blocked by #42
+  #66 blocked by #45
+  #66 blocked by #54
+  #67 blocked by #41
+  #68 blocked by #38
+  #69 blocked by #38
+  #69 blocked by #21
+  #69 blocked by #45
+  #70 blocked by #51
+  #70 blocked by #42
+  #71 blocked by #45
+  #71 blocked by #53
+  #72 blocked by #45
+  #72 blocked by #52
+  #72 blocked by #74
+  #73 blocked by #65
+  #74 blocked by #18
+  #74 blocked by #33
+  #3 is a sub-issue of #75
+  #4 is a sub-issue of #75
+  #5 is a sub-issue of #75
+  #6 is a sub-issue of #75
+  #7 is a sub-issue of #75
+  #8 is a sub-issue of #75
+  #9 is a sub-issue of #75
+  #10 is a sub-issue of #75
+  #11 is a sub-issue of #75
+  #12 is a sub-issue of #75
+  #13 is a sub-issue of #75
+  #14 is a sub-issue of #75
+  #15 is a sub-issue of #75
+  #16 is a sub-issue of #75
+  #17 is a sub-issue of #75
+  #18 is a sub-issue of #75
+  #19 is a sub-issue of #75
+  #20 is a sub-issue of #75
+  #21 is a sub-issue of #75
+  #22 is a sub-issue of #75
+  #23 is a sub-issue of #75
+  #24 is a sub-issue of #75
+  #25 is a sub-issue of #75
+  #26 is a sub-issue of #75
+  #27 is a sub-issue of #75
+  #28 is a sub-issue of #75
+  #29 is a sub-issue of #75

@@ -6,6 +6,17 @@ This repository publishes the real test package
 `@link-foundation/example-package-name` so the template release pipeline is
 validated end to end with npm trusted publishing.
 
+## Associative UI framework plan
+
+This repository is becoming `link-foundation/ui`, an associative UI framework
+whose documents, configuration, styles and animations are written in
+[Links Notation](https://github.com/link-foundation/links-notation).
+
+- [docs/ARCHITECTURE.md](docs/ARCHITECTURE.md) — the target design.
+- [docs/ROADMAP.md](docs/ROADMAP.md) — the roadmap issues in dependency order.
+- [docs/case-studies/issue-1](docs/case-studies/issue-1/README.md) — the case
+  study, requirements, solutions and research behind the plan.
+
 ## Features
 
 - **Multi-runtime support**: Works with Bun, Node.js, and Deno

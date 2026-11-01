@@ -38,7 +38,12 @@ Experiments are in
   written in different layouts;
 - `lino-ui-dialect-roundtrip.mjs` parses every sample and checks that it
   formats back to an equal links network;
-- `create-roadmap-issues.mjs` creates the roadmap issues and their relations.
+- `create-roadmap-issues.mjs` creates the roadmap issues and their relations;
+- `qualify-issue-refs.mjs` rewrites bare `#N` references to other
+  repositories as `owner/repo#N`, so GitHub does not link them to this
+  repository;
+- `verify-roadmap-issues.mjs` checks the created issues against their source
+  files.
 
 ## Timeline
 
@@ -47,6 +52,7 @@ Experiments are in
 | 2026-11-01 10:56 | The repository is created from `link-foundation/js-ai-driven-development-pipeline-template`. The first `main` runs of "Example app", "Checks and release" and "Security" fail (see below). |
 | 2026-11-01 11:20 | Issue #1 is opened.                                                                                                                                                                        |
 | 2026-11-01       | Draft pull request #2 is opened. The data collection, the research, the requirement and solution lists, the architecture proposal and the roadmap issues are added to it.                  |
+| 2026-11-01 12:05 | The roadmap issues #3–#75 are created from `roadmap/issues/` with their "blocked by" relations; #75 is the tracking task (see [`roadmap/README.md`](roadmap/README.md#created-issues)).    |
 
 ## Method
 
@@ -195,6 +201,9 @@ the roadmap, scheduled before every feature.
 | B05 | "Checks and release" fails on `main`: the release preflight finds no npm package and no `NPM_TOKEN`. The package name must be fixed first (B01).                                                                                                                                                                            | [`ci-logs/main-41299671735.log`](ci-logs/main-41299671735.log) line 15                                                   | Maintainer: add `NPM_TOKEN`, then trusted publishing   |
 | B06 | "Security" fails on `main`: the dependency graph is disabled, so dependency review cannot run. Dependency review also has no licence policy yet.                                                                                                                                                                            | [`ci-logs/main-41299671730.log`](ci-logs/main-41299671730.log) line 17; `.github/workflows/security.yml`                 | Maintainer (setting) and pull request (licence policy) |
 
+The bugs were created as issues
+[#3](https://github.com/link-foundation/ui/issues/3) (B01) to
+[#8](https://github.com/link-foundation/ui/issues/8) (B06), in key order.
 Pull requests are not affected by B03, B05 and B06: the checks only warn on
 pull requests and fail on `main` with an explicit message about what a
 maintainer has to do.

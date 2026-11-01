@@ -1,0 +1,440 @@
+{
+  "B01": {
+    "number": 3,
+    "id": 6146663870,
+    "url": "https://github.com/link-foundation/ui/issues/3",
+    "title": "Repository still identifies itself as the JavaScript template"
+  },
+  "B02": {
+    "number": 4,
+    "id": 6146664126,
+    "url": "https://github.com/link-foundation/ui/issues/4",
+    "title": "Inherited template case studies and analyses collide with our issue numbers"
+  },
+  "B03": {
+    "number": 5,
+    "id": 6146664406,
+    "url": "https://github.com/link-foundation/ui/issues/5",
+    "title": "Example app deploy fails on main because GitHub Pages is not enabled"
+  },
+  "B04": {
+    "number": 6,
+    "id": 6146664687,
+    "url": "https://github.com/link-foundation/ui/issues/6",
+    "title": "Preview image regeneration fails on main: `gh` is missing in the Playwright container"
+  },
+  "B05": {
+    "number": 7,
+    "id": 6146665007,
+    "url": "https://github.com/link-foundation/ui/issues/7",
+    "title": "Release preflight fails on main: no npm package and no `NPM_TOKEN`"
+  },
+  "B06": {
+    "number": 8,
+    "id": 6146665278,
+    "url": "https://github.com/link-foundation/ui/issues/8",
+    "title": "Security workflow fails on main because the dependency graph is disabled"
+  },
+  "F01": {
+    "number": 9,
+    "id": 6146665545,
+    "url": "https://github.com/link-foundation/ui/issues/9",
+    "title": "Monorepo workspace for the framework packages"
+  },
+  "F02": {
+    "number": 10,
+    "id": 6146665891,
+    "url": "https://github.com/link-foundation/ui/issues/10",
+    "title": "Licensing and third-party asset records (REUSE, SPDX, CI)"
+  },
+  "F03": {
+    "number": 11,
+    "id": 6146666215,
+    "url": "https://github.com/link-foundation/ui/issues/11",
+    "title": "UI dialect specification v0 with conformance fixtures"
+  },
+  "F04": {
+    "number": 12,
+    "id": 6146666511,
+    "url": "https://github.com/link-foundation/ui/issues/12",
+    "title": "Design guidelines digest: Material 3, Fluent 2, Apple HIG, ARIA"
+  },
+  "F05": {
+    "number": 13,
+    "id": 6146666850,
+    "url": "https://github.com/link-foundation/ui/issues/13",
+    "title": "Visual regression and accessibility test infrastructure"
+  },
+  "F06": {
+    "number": 14,
+    "id": 6146667148,
+    "url": "https://github.com/link-foundation/ui/issues/14",
+    "title": "ui-core: parse Links Notation into the UI element tree"
+  },
+  "F07": {
+    "number": 15,
+    "id": 6146667454,
+    "url": "https://github.com/link-foundation/ui/issues/15",
+    "title": "ui-core: typed values, units, colours and references"
+  },
+  "F08": {
+    "number": 16,
+    "id": 6146667715,
+    "url": "https://github.com/link-foundation/ui/issues/16",
+    "title": "ui-store: links network store with stable IDs and undo/redo"
+  },
+  "F09": {
+    "number": 17,
+    "id": 6146667968,
+    "url": "https://github.com/link-foundation/ui/issues/17",
+    "title": "ui-store: IndexedDB persistence compatible with doublets-web"
+  },
+  "F10": {
+    "number": 18,
+    "id": 6146668242,
+    "url": "https://github.com/link-foundation/ui/issues/18",
+    "title": "ui-config: layered configuration and override patches"
+  },
+  "F11": {
+    "number": 19,
+    "id": 6146668552,
+    "url": "https://github.com/link-foundation/ui/issues/19",
+    "title": "ui-tokens: design tokens in LiNo with CSS, DTCG, Swift, Kotlin output"
+  },
+  "F12": {
+    "number": 20,
+    "id": 6146668828,
+    "url": "https://github.com/link-foundation/ui/issues/20",
+    "title": "ui-style: style rules, states and responsive conditions"
+  },
+  "F13": {
+    "number": 21,
+    "id": 6146669101,
+    "url": "https://github.com/link-foundation/ui/issues/21",
+    "title": "ui-i18n: localisation with lino-i18n"
+  },
+  "F14": {
+    "number": 22,
+    "id": 6146669372,
+    "url": "https://github.com/link-foundation/ui/issues/22",
+    "title": "Source-preserving LiNo edits (comments and layout kept)"
+  },
+  "F15": {
+    "number": 23,
+    "id": 6146669653,
+    "url": "https://github.com/link-foundation/ui/issues/23",
+    "title": "Settings schema engine: validation, presets, diff-only sharing"
+  },
+  "F16": {
+    "number": 24,
+    "id": 6146669898,
+    "url": "https://github.com/link-foundation/ui/issues/24",
+    "title": "ui-dom: reference DOM renderer with custom elements"
+  },
+  "F17": {
+    "number": 25,
+    "id": 6146670223,
+    "url": "https://github.com/link-foundation/ui/issues/25",
+    "title": "HTML/DOM to LiNo importer"
+  },
+  "F18": {
+    "number": 26,
+    "id": 6146670536,
+    "url": "https://github.com/link-foundation/ui/issues/26",
+    "title": "ui-react: React adapter"
+  },
+  "F19": {
+    "number": 27,
+    "id": 6146670838,
+    "url": "https://github.com/link-foundation/ui/issues/27",
+    "title": "ui-vue: Vue adapter"
+  },
+  "F20": {
+    "number": 28,
+    "id": 6146671151,
+    "url": "https://github.com/link-foundation/ui/issues/28",
+    "title": "ui-react-native: React Native renderer"
+  },
+  "F21": {
+    "number": 29,
+    "id": 6146671418,
+    "url": "https://github.com/link-foundation/ui/issues/29",
+    "title": "Swift Links Notation parser"
+  },
+  "F22": {
+    "number": 30,
+    "id": 6146671724,
+    "url": "https://github.com/link-foundation/ui/issues/30",
+    "title": "ui-swift: SwiftUI renderer"
+  },
+  "F23": {
+    "number": 31,
+    "id": 6146672030,
+    "url": "https://github.com/link-foundation/ui/issues/31",
+    "title": "Kotlin Links Notation parser"
+  },
+  "F24": {
+    "number": 32,
+    "id": 6146672334,
+    "url": "https://github.com/link-foundation/ui/issues/32",
+    "title": "ui-kotlin: Jetpack Compose renderer"
+  },
+  "F25": {
+    "number": 33,
+    "id": 6146672596,
+    "url": "https://github.com/link-foundation/ui/issues/33",
+    "title": "Behaviour state machines, actions registry and accessibility"
+  },
+  "F26": {
+    "number": 34,
+    "id": 6146672898,
+    "url": "https://github.com/link-foundation/ui/issues/34",
+    "title": "Basic controls"
+  },
+  "F27": {
+    "number": 35,
+    "id": 6146673253,
+    "url": "https://github.com/link-foundation/ui/issues/35",
+    "title": "Overlays and navigation (dialog, popover, menu, tabs, toast, radial menu)"
+  },
+  "F28": {
+    "number": 36,
+    "id": 6146673519,
+    "url": "https://github.com/link-foundation/ui/issues/36",
+    "title": "Layout and windowing (stack, grid, split panes, docking, windows)"
+  },
+  "F29": {
+    "number": 37,
+    "id": 6146673826,
+    "url": "https://github.com/link-foundation/ui/issues/37",
+    "title": "Data display: lists, trees, tables, virtualisation"
+  },
+  "F30": {
+    "number": 38,
+    "id": 6146674164,
+    "url": "https://github.com/link-foundation/ui/issues/38",
+    "title": "Chat UI kit (from meta-sovereign and formal-ai)"
+  },
+  "F31": {
+    "number": 39,
+    "id": 6146674434,
+    "url": "https://github.com/link-foundation/ui/issues/39",
+    "title": "Charts"
+  },
+  "F32": {
+    "number": 40,
+    "id": 6146674704,
+    "url": "https://github.com/link-foundation/ui/issues/40",
+    "title": "Diagrams (Mermaid and LiNo diagrams)"
+  },
+  "F33": {
+    "number": 41,
+    "id": 6146675035,
+    "url": "https://github.com/link-foundation/ui/issues/41",
+    "title": "Single link visualisation (from links-visuals)"
+  },
+  "F34": {
+    "number": 42,
+    "id": 6146675361,
+    "url": "https://github.com/link-foundation/ui/issues/42",
+    "title": "Links network visualisation (layouts, interaction, worker)"
+  },
+  "F35": {
+    "number": 43,
+    "id": 6146675656,
+    "url": "https://github.com/link-foundation/ui/issues/43",
+    "title": "Universal Links Notation to network visualisation converter"
+  },
+  "F36": {
+    "number": 44,
+    "id": 6146675977,
+    "url": "https://github.com/link-foundation/ui/issues/44",
+    "title": "Icons and asset pipeline"
+  },
+  "F37": {
+    "number": 45,
+    "id": 6146676274,
+    "url": "https://github.com/link-foundation/ui/issues/45",
+    "title": "Settings panel generated from the settings schema"
+  },
+  "F38": {
+    "number": 46,
+    "id": 6146676565,
+    "url": "https://github.com/link-foundation/ui/issues/46",
+    "title": "Code and LiNo text editor component"
+  },
+  "F39": {
+    "number": 47,
+    "id": 6146676828,
+    "url": "https://github.com/link-foundation/ui/issues/47",
+    "title": "Theme engine: nested themes, colour schemes, contrast, motion"
+  },
+  "F40": {
+    "number": 48,
+    "id": 6146677099,
+    "url": "https://github.com/link-foundation/ui/issues/48",
+    "title": "Material 3 theme and MUI mapping"
+  },
+  "F41": {
+    "number": 49,
+    "id": 6146677439,
+    "url": "https://github.com/link-foundation/ui/issues/49",
+    "title": "Fluent 2 theme"
+  },
+  "F42": {
+    "number": 50,
+    "id": 6146677830,
+    "url": "https://github.com/link-foundation/ui/issues/50",
+    "title": "Apple HIG theme"
+  },
+  "F43": {
+    "number": 51,
+    "id": 6146678144,
+    "url": "https://github.com/link-foundation/ui/issues/51",
+    "title": "Classic themes: deepcase versions, konard.github.io, formal-ai skins"
+  },
+  "F44": {
+    "number": 52,
+    "id": 6146678449,
+    "url": "https://github.com/link-foundation/ui/issues/52",
+    "title": "ui-animation: animation model and player"
+  },
+  "F45": {
+    "number": 53,
+    "id": 6146678767,
+    "url": "https://github.com/link-foundation/ui/issues/53",
+    "title": "Animation and interaction recorder, replay"
+  },
+  "F46": {
+    "number": 54,
+    "id": 6146679076,
+    "url": "https://github.com/link-foundation/ui/issues/54",
+    "title": "Development/configuration mode inspector overlay"
+  },
+  "F47": {
+    "number": 55,
+    "id": 6146679395,
+    "url": "https://github.com/link-foundation/ui/issues/55",
+    "title": "\"Make these the defaults\": agent hand-off and share links"
+  },
+  "F48": {
+    "number": 56,
+    "id": 6146679684,
+    "url": "https://github.com/link-foundation/ui/issues/56",
+    "title": "WYSIWYG designer"
+  },
+  "F49": {
+    "number": 57,
+    "id": 6146679984,
+    "url": "https://github.com/link-foundation/ui/issues/57",
+    "title": "Animation timeline editor"
+  },
+  "F50": {
+    "number": 58,
+    "id": 6146680339,
+    "url": "https://github.com/link-foundation/ui/issues/58",
+    "title": "Development mode for pages not built with the framework"
+  },
+  "F51": {
+    "number": 59,
+    "id": 6146680625,
+    "url": "https://github.com/link-foundation/ui/issues/59",
+    "title": "Importers: JSX, MUI and Vue single-file components via meta-language"
+  },
+  "F52": {
+    "number": 60,
+    "id": 6146680874,
+    "url": "https://github.com/link-foundation/ui/issues/60",
+    "title": "Code exporters: React, Vue, SwiftUI and Compose source"
+  },
+  "F53": {
+    "number": 61,
+    "id": 6146681178,
+    "url": "https://github.com/link-foundation/ui/issues/61",
+    "title": "Interop with A2UI, Adaptive Cards, JSON Forms and Lottie"
+  },
+  "F54": {
+    "number": 62,
+    "id": 6146681474,
+    "url": "https://github.com/link-foundation/ui/issues/62",
+    "title": "Documentation and demo site built with the framework"
+  },
+  "F55": {
+    "number": 63,
+    "id": 6146681737,
+    "url": "https://github.com/link-foundation/ui/issues/63",
+    "title": "Component gallery and live playground"
+  },
+  "F56": {
+    "number": 64,
+    "id": 6146682006,
+    "url": "https://github.com/link-foundation/ui/issues/64",
+    "title": "Contributor guide and issue templates for AI agents"
+  },
+  "F57": {
+    "number": 65,
+    "id": 6146682291,
+    "url": "https://github.com/link-foundation/ui/issues/65",
+    "title": "Migration playbook and MUI-to-framework mapping guide"
+  },
+  "F58": {
+    "number": 66,
+    "id": 6146682589,
+    "url": "https://github.com/link-foundation/ui/issues/66",
+    "title": "Migrate konard.github.io"
+  },
+  "F59": {
+    "number": 67,
+    "id": 6146682889,
+    "url": "https://github.com/link-foundation/ui/issues/67",
+    "title": "Migrate links-visuals"
+  },
+  "F60": {
+    "number": 68,
+    "id": 6146683157,
+    "url": "https://github.com/link-foundation/ui/issues/68",
+    "title": "Migrate meta-sovereign chat"
+  },
+  "F61": {
+    "number": 69,
+    "id": 6146683520,
+    "url": "https://github.com/link-foundation/ui/issues/69",
+    "title": "Migrate formal-ai"
+  },
+  "F62": {
+    "number": 70,
+    "id": 6146683866,
+    "url": "https://github.com/link-foundation/ui/issues/70",
+    "title": "Migrate deepcase"
+  },
+  "F63": {
+    "number": 71,
+    "id": 6146684192,
+    "url": "https://github.com/link-foundation/ui/issues/71",
+    "title": "Migrate anime-avatar"
+  },
+  "F64": {
+    "number": 72,
+    "id": 6146684445,
+    "url": "https://github.com/link-foundation/ui/issues/72",
+    "title": "Migrate immortality"
+  },
+  "F65": {
+    "number": 73,
+    "id": 6146684712,
+    "url": "https://github.com/link-foundation/ui/issues/73",
+    "title": "Migrate the remaining UI projects of our organisations"
+  },
+  "F66": {
+    "number": 74,
+    "id": 6146685021,
+    "url": "https://github.com/link-foundation/ui/issues/74",
+    "title": "ui-sound: UI sound themes with Web Audio"
+  },
+  "T01": {
+    "number": 75,
+    "id": 6146685289,
+    "url": "https://github.com/link-foundation/ui/issues/75",
+    "title": "Roadmap: associative UI framework"
+  }
+}
