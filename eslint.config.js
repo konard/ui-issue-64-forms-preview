@@ -115,6 +115,7 @@ export default [
     // tests contain fixtures the rule is designed to flag.
     files: [
       'docs/case-studies/**/*.{js,mjs,cjs}',
+      'docs/template-history/**/*.{js,mjs,cjs}',
       'tests/no-changelog-comments.test.js',
     ],
     rules: {
@@ -135,6 +136,7 @@ export default [
       'reports/**',
       // Case study raw data files (downloaded from external sources)
       'docs/case-studies/*/data/**',
+      'docs/template-history/case-studies/*/data/**',
       'dev/log/**',
     ],
   },

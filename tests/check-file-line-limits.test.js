@@ -206,6 +206,7 @@ describe('check-file-line-limits.sh', () => {
         'docs/case-studies/issue-99/data/raw.md': 5000,
         'docs/case-studies/issue-99/data/sample.cjs': 5000,
         'docs/case-studies/issue-99/data/external.yml': 5000,
+        'docs/template-history/case-studies/issue-23/data/raw.yml': 5000,
         'README.md': 1,
       });
 
@@ -219,6 +220,7 @@ describe('check-file-line-limits.sh', () => {
         expect(result.stdout).not.toContain('data/raw.md');
         expect(result.stdout).not.toContain('data/sample.cjs');
         expect(result.stdout).not.toContain('data/external.yml');
+        expect(result.stdout).not.toContain('data/raw.yml');
         expect(result.stdout).toContain('Checked 1 tracked files');
       } finally {
         rmSync(root, { recursive: true, force: true });

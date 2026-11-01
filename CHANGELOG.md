@@ -413,7 +413,7 @@ url, error }`, so an HTTP 404 ("not published") is distinguished from an
   - Add case study documentation for issue #23 with root cause analysis
   - Add ignore patterns for case study data files in ESLint and Prettier
 
-  See docs/case-studies/issue-23 for detailed analysis of the stale merge preview problem.
+  See docs/template-history/case-studies/issue-23 for detailed analysis of the stale merge preview problem.
 
   Fixes #23
 
@@ -426,7 +426,7 @@ url, error }`, so an HTTP 404 ("not published") is distinguished from an
   - Support both `./package.json` (single-language) and `./js/package.json` (multi-language repos)
   - Add `--legacy-peer-deps` flag to npm install commands in release scripts to fix ERESOLVE errors
   - Save and restore working directory after `cd` commands to fix `command-stream` library's `process.chdir()` behavior
-  - Add case study documentation with root cause analysis in `docs/case-studies/issue-21/`
+  - Add case study documentation with root cause analysis in `docs/template-history/case-studies/issue-21/`
 
 ## 0.3.0
 

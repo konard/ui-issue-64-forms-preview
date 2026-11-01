@@ -81,10 +81,14 @@ test('README.md only change', ['README.md'], {
   docsChanged: true,
 });
 
-test('docs/ folder change', ['docs/case-studies/issue-31/README.md'], {
-  anyCodeChanged: false,
-  docsChanged: true,
-});
+test(
+  'docs/ folder change',
+  ['docs/template-history/case-studies/issue-31/README.md'],
+  {
+    anyCodeChanged: false,
+    docsChanged: true,
+  }
+);
 
 test('.mjs file change', ['scripts/detect-code-changes.mjs'], {
   anyCodeChanged: true,
