@@ -194,6 +194,8 @@ looks) are just alternative packages. Migration from MUI, Fluent UI, shadcn/ui
 and other frameworks is a converter plus a mapping table into the same
 dialect.
 
+The shared component catalogue and token taxonomy live in [`docs/guidelines/`](guidelines/README.md).
+
 ## Platforms
 
 - **Web:** custom elements (plain JavaScript), React and Vue wrappers over the
