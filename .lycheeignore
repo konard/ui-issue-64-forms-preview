@@ -24,3 +24,7 @@ https://medium\.com
 
 # Web Archive returns 502 to link checkers (bot protection)
 https://web\.archive\.org
+
+# GitHub Pages site returns 404 until a maintainer enables Pages with source
+# "GitHub Actions" (issue #5). Remove this entry once the site is live.
+https://link-foundation\.github\.io/ui/?$
