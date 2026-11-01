@@ -195,7 +195,8 @@ describe('dependency review licence policy', () => {
     for (const lock of listPackageLocks()) {
       const { packages = {} } = JSON.parse(readFileSync(lock, 'utf8'));
       for (const [path, info] of Object.entries(packages)) {
-        if (!path) {
+        // Workspace links carry no licence; their target record is checked.
+        if (!path || info.link) {
           continue;
         }
         const name = path.replace(/.*node_modules\//, '');
