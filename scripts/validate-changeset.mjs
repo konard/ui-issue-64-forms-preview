@@ -14,10 +14,7 @@ import { readFileSync, readdirSync, existsSync } from 'fs';
 import { join } from 'path';
 
 import { getChangesetDir, getJsRoot, parseJsRootConfig } from './js-paths.mjs';
-import {
-  getChangesetVersionTypeRegex,
-  readPackageInfo,
-} from './package-info.mjs';
+import { readReleasePackages } from './package-info.mjs';
 import { printUntrusted } from './github-actions-log.mjs';
 import {
   getPrComparison,
@@ -95,24 +92,56 @@ function getAddedChangesetFiles(changesetDir, jsRoot) {
 }
 
 /**
+ * Parse the package bumps of a changeset frontmatter.
+ * Every non-empty line must be `'<package>': <major|minor|patch>` and every
+ * package must be one of the known release packages.
+ * @param {string} frontmatter
+ * @param {string[]} packageNames
+ * @returns {{bumps: Array<{name: string, type: string}>, error?: string}}
+ */
+function parseChangesetBumps(frontmatter, packageNames) {
+  const bumps = [];
+  for (const line of frontmatter.split(/\r?\n/)) {
+    if (line.trim() === '') {
+      continue;
+    }
+    const match = line.match(/^(['"])([^'"]+)\1:\s+(major|minor|patch)\s*$/);
+    if (!match) {
+      return { bumps, error: `Invalid changeset frontmatter line: ${line}` };
+    }
+    const [, , name, type] = match;
+    if (!packageNames.includes(name)) {
+      return {
+        bumps,
+        error: `Unknown package ${name} in changeset. Known packages: ${packageNames.join(', ')}`,
+      };
+    }
+    bumps.push({ name, type });
+  }
+  return { bumps };
+}
+
+/**
  * Validate a single changeset file
  * @param {string} filePath Full path to the changeset file
- * @param {string} packageName
+ * @param {string[]} packageNames - release package names the changeset may name
  * @returns {{valid: boolean, type?: string, description?: string, error?: string}}
  */
-function validateChangesetFile(filePath, packageName) {
+function validateChangesetFile(filePath, packageNames) {
   try {
     const content = readFileSync(filePath, 'utf-8');
 
-    // Check if changeset has a valid type (major, minor, or patch)
-    const versionTypeRegex = getChangesetVersionTypeRegex(packageName);
+    // Check that every bump names a known package and a valid type
     const frontmatter = content.match(/^---\r?\n([\s\S]*?)\r?\n---(?:\r?\n|$)/);
-    const versionTypeMatch = frontmatter?.[1].match(versionTypeRegex);
+    const { bumps, error } = parseChangesetBumps(
+      frontmatter?.[1] ?? '',
+      packageNames
+    );
 
-    if (!versionTypeMatch) {
+    if (error || bumps.length === 0) {
       return {
         valid: false,
-        error: `Changeset must specify a version type: major, minor, or patch\nExpected format:\n---\n'${packageName}': patch\n---\n\nYour description here`,
+        error: `${error ? `${error}\n` : ''}Changeset must specify a version type: major, minor, or patch\nExpected format:\n---\n'${packageNames[0]}': patch\n---\n\nYour description here`,
       };
     }
 
@@ -136,7 +165,7 @@ function validateChangesetFile(filePath, packageName) {
 
     return {
       valid: true,
-      type: versionTypeMatch[1],
+      type: bumps.map((bump) => `${bump.name}: ${bump.type}`).join(', '),
       description,
     };
   } catch (error) {
@@ -152,8 +181,8 @@ try {
   const jsRootConfig = parseJsRootConfig();
   const jsRoot = getJsRoot({ jsRoot: jsRootConfig, verbose: true });
   const changesetDir = getChangesetDir({ jsRoot });
-  const { name: packageName } = readPackageInfo({ jsRoot });
-  console.log(`Package: ${packageName}`);
+  const packageNames = readReleasePackages({ jsRoot }).map((pkg) => pkg.name);
+  console.log(`Packages: ${packageNames.join(', ')}`);
 
   // Get changeset files added in this PR
   const addedChangesetFiles = getAddedChangesetFiles(changesetDir, jsRoot);
@@ -190,7 +219,7 @@ try {
   const changesetFile = join(changesetDir, addedChangesetFiles[0]);
   console.log(`Validating changeset: ${changesetFile}`);
 
-  const validation = validateChangesetFile(changesetFile, packageName);
+  const validation = validateChangesetFile(changesetFile, packageNames);
 
   if (!validation.valid) {
     console.error(`::error::${validation.error}`);

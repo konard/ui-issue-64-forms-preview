@@ -1,6 +1,12 @@
 import { readFileSync } from 'node:fs';
 
-import { getPackageJsonPath } from './js-paths.mjs';
+import { getJsRoot, getPackageJsonPath } from './js-paths.mjs';
+import {
+  isWorkspaceRoot,
+  listReleasePackagesSync,
+  packagePath,
+  resolveReleasePackage,
+} from './workspace-packages.mjs';
 
 /**
  * Parse package metadata from a package.json file body.
@@ -39,16 +45,46 @@ export function parsePackageInfo(
 }
 
 /**
- * Read package name and version from the detected JavaScript package root.
+ * Read name and version of the package a release step works on.
+ *
+ * A single-package root returns the root package. An npm workspaces root
+ * returns the release package chosen by resolveReleasePackage(): the only
+ * publishable workspace package, or the one named by `packageName` /
+ * RELEASE_PACKAGE.
+ *
  * @param {Object} options - Configuration options (passed to getPackageJsonPath)
- * @returns {{name: string, version: string}}
+ * @param {string} [options.packageName] - workspace package to select
+ * @returns {{name: string, version: string, dir: string, packageJsonPath: string}}
  */
 export function readPackageInfo(options = {}) {
-  const packageJsonPath = getPackageJsonPath(options);
-  return parsePackageInfo(
-    readFileSync(packageJsonPath, 'utf8'),
-    packageJsonPath
-  );
+  const jsRoot =
+    options.jsRoot !== undefined ? options.jsRoot : getJsRoot(options);
+  let packageJsonPath = getPackageJsonPath({ ...options, jsRoot });
+  let dir = '.';
+  if (isWorkspaceRoot(jsRoot)) {
+    dir = resolveReleasePackage(jsRoot, options).dir;
+    packageJsonPath = packagePath(jsRoot, dir, 'package.json');
+  }
+  return {
+    ...parsePackageInfo(readFileSync(packageJsonPath, 'utf8'), packageJsonPath),
+    dir,
+    packageJsonPath,
+  };
+}
+
+/**
+ * Read every package a release must handle (see listReleasePackagesSync).
+ * @param {Object} options
+ * @param {string} [options.jsRoot]
+ * @returns {Array<{name: string, version: string, dir: string, private: boolean, packageJsonPath: string}>}
+ */
+export function readReleasePackages(options = {}) {
+  const jsRoot =
+    options.jsRoot !== undefined ? options.jsRoot : getJsRoot(options);
+  return listReleasePackagesSync(jsRoot).map((pkg) => ({
+    ...pkg,
+    packageJsonPath: packagePath(jsRoot, pkg.dir, 'package.json'),
+  }));
 }
 
 /**

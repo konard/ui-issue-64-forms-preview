@@ -1,24 +1,14 @@
 {
   "name": "@link-foundation/ui",
   "version": "0.11.31",
-  "description": "Associative UI framework whose documents, configuration, styles and animations are written in Links Notation",
+  "private": true,
+  "description": "Associative UI framework monorepo: npm workspaces under packages/ whose documents, configuration, styles and animations are written in Links Notation",
   "type": "module",
-  "main": "src/index.js",
-  "types": "src/index.d.ts",
-  "files": [
-    "src/",
-    "CHANGELOG.md",
-    "LICENSE",
-    "README.md"
+  "workspaces": [
+    "packages/*"
   ],
-  "exports": {
-    ".": {
-      "types": "./src/index.d.ts",
-      "import": "./src/index.js"
-    }
-  },
   "scripts": {
-    "test": "node --test --test-timeout=30000 tests/*.test.js",
+    "test": "node --test --test-timeout=30000 tests/*.test.js packages/*/tests/*.test.js",
     "lint": "node scripts/lint.mjs",
     "lint:all": "eslint .",
     "lint:fix": "eslint . --fix",
@@ -54,9 +44,6 @@
     "packageManager": {
       "name": "npm"
     }
-  },
-  "publishConfig": {
-    "access": "public"
   },
   "repository": {
     "type": "git",

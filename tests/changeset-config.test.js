@@ -48,6 +48,27 @@ function cleanupLinkedFixture(cwd, links, failure) {
   });
 }
 
+/**
+ * Copy the ui-core manifest and a ui-core changeset into the fixture. The npm
+ * workspaces root is private; releases version the publishable workspace
+ * package only.
+ */
+function writeWorkspaceFixture(cwd) {
+  const packageDir = join(cwd, 'packages/ui-core');
+  mkdirSync(packageDir, { recursive: true });
+  const packageManifest = readFileSync(
+    'packages/ui-core/package.json',
+    'utf8'
+  ).replaceAll('\r\n', '\n');
+  writeFileSync(join(packageDir, 'package.json'), packageManifest);
+  const pkg = JSON.parse(packageManifest);
+  writeFileSync(
+    join(cwd, '.changeset/release-check.md'),
+    `---\n"${pkg.name}": patch\n---\n\nCheck release versioning.\n`
+  );
+  return { packageDir, pkg };
+}
+
 describe('Changesets release formatter', () => {
   it('uses the same formatter as the project formatting check', () => {
     expect(config.format).toBe('prettier');
@@ -85,6 +106,8 @@ describe('Changesets release formatter', () => {
       try {
         for (const file of [
           'package.json',
+          // Changesets detects npm workspaces through the npm lock file.
+          'package-lock.json',
           'deno.json',
           'deno.lock',
           '.prettierrc',
@@ -102,12 +125,8 @@ describe('Changesets release formatter', () => {
           'utf8'
         ).replaceAll('\r\n', '\n');
         writeFileSync(join(cwd, 'package.json'), manifest);
-        const pkg = JSON.parse(manifest);
-        writeFileSync(
-          join(cwd, '.changeset/release-check.md'),
-          `---\n"${pkg.name}": patch\n---\n\nCheck release versioning.\n`
-        );
-        writeFileSync(join(cwd, 'CHANGELOG.md'), `# ${pkg.name}\n`);
+        const rootVersion = JSON.parse(manifest).version;
+        const { packageDir, pkg } = writeWorkspaceFixture(cwd);
         // Deno's automatic installation does not promise npm-style bin links.
         // Give npm a minimal local tree with the actual installed CLI/formatter.
         mkdirSync(join(dependencies, '@changesets'), { recursive: true });
@@ -172,18 +191,24 @@ describe('Changesets release formatter', () => {
         const versionParts = pkg.version.split('.').map(Number);
         versionParts[2] += 1;
         expect(
-          JSON.parse(readFileSync(join(cwd, 'package.json'), 'utf8')).version
+          JSON.parse(readFileSync(join(packageDir, 'package.json'), 'utf8'))
+            .version
         ).toBe(versionParts.join('.'));
+        expect(
+          JSON.parse(readFileSync(join(cwd, 'package.json'), 'utf8')).version
+        ).toBe(rootVersion);
+        expect(readFileSync(join(cwd, 'package.json'), 'utf8')).toBe(manifest);
         expect(existsSync(join(cwd, '.changeset/release-check.md'))).toBe(
           false
         );
-        expect(readFileSync(join(cwd, 'CHANGELOG.md'), 'utf8')).toContain(
-          'Check release versioning.'
-        );
+        expect(existsSync(join(cwd, 'CHANGELOG.md'))).toBe(false);
+        expect(
+          readFileSync(join(packageDir, 'CHANGELOG.md'), 'utf8')
+        ).toContain('Check release versioning.');
         await run('node_modules/prettier/bin/prettier.cjs', [
           '--check',
-          'package.json',
-          'CHANGELOG.md',
+          'packages/ui-core/package.json',
+          'packages/ui-core/CHANGELOG.md',
         ]);
       } catch (error) {
         failure = error;

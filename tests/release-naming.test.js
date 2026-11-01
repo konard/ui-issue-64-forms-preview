@@ -6,11 +6,13 @@ import {
   getDefaultTagPrefix,
   getReleaseTagPrefix,
   isMultiLanguage,
+  isWorkspaceRelease,
   normalizeReleaseVersion,
 } from '../scripts/release-naming.mjs';
 
 const MULTI = { jsRoot: 'js' };
-const SINGLE = { jsRoot: '.' };
+const SINGLE = { jsRoot: '.', workspace: false };
+const WORKSPACE = { jsRoot: '.' };
 
 describe('release naming layout detection', () => {
   it('treats js/package.json layouts as multi-language', () => {
@@ -33,6 +35,28 @@ describe('release naming tag prefixes', () => {
 
   it('keeps an explicit tag prefix override', () => {
     expect(getReleaseTagPrefix({ ...MULTI, tagPrefix: 'js-v' })).toBe('js-v');
+  });
+});
+
+describe('release naming in the npm workspaces root', () => {
+  it('detects the repository root as a workspace release', () => {
+    expect(isWorkspaceRelease(WORKSPACE)).toBe(true);
+    expect(isWorkspaceRelease(SINGLE)).toBe(false);
+  });
+
+  it('tags the only publishable workspace package as <name>@<version>', () => {
+    expect(getDefaultTagPrefix(WORKSPACE)).toBe('@link-foundation/ui-core@');
+    expect(buildReleaseTag('1.2.3', WORKSPACE)).toBe(
+      '@link-foundation/ui-core@1.2.3'
+    );
+  });
+
+  it('uses an explicitly named package and does not double-prefix', () => {
+    const options = { ...WORKSPACE, packageName: '@scope/pkg' };
+    expect(buildReleaseTag('@scope/pkg@1.2.3', options)).toBe(
+      '@scope/pkg@1.2.3'
+    );
+    expect(normalizeReleaseVersion('@scope/pkg@1.2.3-rc.1')).toBe('1.2.3-rc.1');
   });
 });
 

@@ -22,7 +22,7 @@ import { appendFileSync } from 'fs';
 
 import { getJsRoot, needsCd, parseJsRootConfig } from './js-paths.mjs';
 import { isPackageVersionPublished } from './npm-registry.mjs';
-import { readPackageInfo } from './package-info.mjs';
+import { readPackageInfo, readReleasePackages } from './package-info.mjs';
 import {
   buildAuthFailureGuidance,
   isNonRetryableFailure,
@@ -224,6 +224,52 @@ async function runPublishCommand(shell, jsRoot, originalCwd) {
   return { success: true, error: null, output };
 }
 
+/**
+ * The package whose version the release job reports (published_version).
+ * With several publishable packages and no RELEASE_PACKAGE there is none.
+ * @returns {{name: string, version: string} | null}
+ */
+function readPrimaryPackage() {
+  try {
+    return readPackageInfo({ jsRoot });
+  } catch (error) {
+    console.log(`No single release package: ${error.message}`);
+    return null;
+  }
+}
+
+/**
+ * The release packages npm does not have yet.
+ * @param {{name: string, version: string}[]} packages
+ */
+async function findUnpublishedPackages(packages) {
+  const pending = [];
+  for (const pkg of packages) {
+    console.log(
+      `Checking if ${pkg.name}@${pkg.version} is already published...`
+    );
+    if (await isPackageVersionPublished(pkg.name, pkg.version)) {
+      console.log(`${pkg.name}@${pkg.version} is already published to npm`);
+    } else {
+      pending.push(pkg);
+    }
+  }
+  return pending;
+}
+
+/**
+ * @param {{name: string, version: string}[]} packages
+ * @returns {Promise<boolean>} whether every package is visible on npm
+ */
+async function verifyAllPublished(packages) {
+  for (const pkg of packages) {
+    if (!(await verifyPublished(pkg.name, pkg.version))) {
+      return false;
+    }
+  }
+  return true;
+}
+
 async function main() {
   try {
     if (shouldPull) {
@@ -231,33 +277,31 @@ async function main() {
       await $`git pull origin main`;
     }
 
-    // Get current version
-    const { name: packageName, version: currentVersion } = readPackageInfo({
-      jsRoot,
-    });
-    console.log(`Package to publish: ${packageName}`);
-    console.log(`Current version to publish: ${currentVersion}`);
+    // Every publishable package (the root package in a single-package
+    // repository, every non-private workspace package in a monorepo).
+    // `changeset publish` publishes all of them that npm does not have yet.
+    const packages = readReleasePackages({ jsRoot });
+    const primary = readPrimaryPackage();
+    for (const pkg of packages) {
+      console.log(`Package to publish: ${pkg.name}@${pkg.version}`);
+    }
 
-    // Check if this version is already published on npm
-    console.log(
-      `Checking if version ${currentVersion} is already published...`
-    );
-    const isAlreadyPublished = await isPackageVersionPublished(
-      packageName,
-      currentVersion
-    );
+    const pending = await findUnpublishedPackages(packages);
 
-    if (isAlreadyPublished) {
-      console.log(`Version ${currentVersion} is already published to npm`);
+    setOutput(
+      'published_packages',
+      packages.map((pkg) => `${pkg.name}@${pkg.version}`).join(',')
+    );
+    if (pending.length === 0) {
       setOutput('published', 'true');
-      setOutput('published_version', currentVersion);
+      setOutput('published_version', primary?.version ?? '');
       setOutput('already_published', 'true');
       return;
     }
 
     // Version not found on npm (E404), proceed with publish
     console.log(
-      `Version ${currentVersion} not found on npm, proceeding with publish...`
+      `Not on npm yet, proceeding with publish: ${pending.map((pkg) => `${pkg.name}@${pkg.version}`).join(', ')}`
     );
 
     // Publish to npm using OIDC trusted publishing with retry logic
@@ -269,7 +313,7 @@ async function main() {
     // republish.
     const { success, error } = await publishWithRetry({
       publish: () => runPublishCommand($, jsRoot, originalCwd),
-      verify: () => verifyPublished(packageName, currentVersion),
+      verify: () => verifyAllPublished(pending),
       maxRetries: MAX_RETRIES,
       retryDelay: RETRY_DELAY,
       sleepFn: sleep,
@@ -278,8 +322,10 @@ async function main() {
 
     if (success) {
       setOutput('published', 'true');
-      setOutput('published_version', currentVersion);
-      console.log(`\u2705 Published ${packageName}@${currentVersion} to npm`);
+      setOutput('published_version', primary?.version ?? '');
+      for (const pkg of pending) {
+        console.log(`\u2705 Published ${pkg.name}@${pkg.version} to npm`);
+      }
       return;
     }
 
@@ -287,7 +333,9 @@ async function main() {
     // Authentication / registry-configuration errors will not be fixed by
     // retrying, so print actionable guidance for the operator.
     if (error?.nonRetryable && !error?.verificationFailed) {
-      console.error(buildAuthFailureGuidance(packageName));
+      console.error(
+        buildAuthFailureGuidance(pending.map((pkg) => pkg.name).join(', '))
+      );
     }
     process.exit(1);
   } catch (error) {
