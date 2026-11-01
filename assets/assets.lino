@@ -1,0 +1,5 @@
+(links-ui-logo: asset
+  (kind image)
+  (files 'assets/links-ui-logo.svg')
+  (license CC0-1.0)
+  (copyright none))
