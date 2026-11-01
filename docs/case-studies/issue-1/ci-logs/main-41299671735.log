@@ -1,0 +1,107 @@
+Release Preflight	Probe every release credential	﻿2026-11-01T10:56:49.2310110Z ##[group]Run bash scripts/preflight-credentials.sh
+Release Preflight	Probe every release credential	2026-11-01T10:56:49.2311445Z ^[[36;1mbash scripts/preflight-credentials.sh^[[0m
+Release Preflight	Probe every release credential	2026-11-01T10:56:49.2333098Z shell: /usr/bin/bash -e {0}
+Release Preflight	Probe every release credential	2026-11-01T10:56:49.2333958Z env:
+Release Preflight	Probe every release credential	2026-11-01T10:56:49.2334610Z   GIT_CONFIG_COUNT: 1
+Release Preflight	Probe every release credential	2026-11-01T10:56:49.2335415Z   GIT_CONFIG_KEY_0: init.defaultBranch
+Release Preflight	Probe every release credential	2026-11-01T10:56:49.2336576Z   GIT_CONFIG_VALUE_0: main
+Release Preflight	Probe every release credential	2026-11-01T10:56:49.2337683Z   PREFLIGHT_MODE: release
+Release Preflight	Probe every release credential	2026-11-01T10:56:49.2338482Z   NPM_TOKEN: 
+Release Preflight	Probe every release credential	2026-11-01T10:56:49.2339151Z   DOCKERHUB_IMAGE: 
+Release Preflight	Probe every release credential	2026-11-01T10:56:49.2339878Z   DOCKERHUB_USERNAME: 
+Release Preflight	Probe every release credential	2026-11-01T10:56:49.2341025Z   DOCKERHUB_TOKEN: ***
+Release Preflight	Probe every release credential	2026-11-01T10:56:49.2341780Z ##[endgroup]
+Release Preflight	Probe every release credential	2026-11-01T10:56:49.2418999Z npm:
+Release Preflight	Probe every release credential	2026-11-01T10:56:50.1850732Z   FAIL: npm has no package @link-foundation/example-package-name yet, and npm configures trusted publishing only for published packages. Add an NPM_TOKEN repository secret (a granular token allowed to publish @link-foundation/example-package-name) at https://github.com/link-foundation/ui/settings/secrets/actions for the first release, then add a trusted publisher for link-foundation/ui, workflow release.yml, at https://www.npmjs.com/package/@link-foundation/example-package-name/access and delete the secret
+Release Preflight	Probe every release credential	2026-11-01T10:56:50.1854666Z   SKIP: NPM_TOKEN is not set; OIDC trusted publishing is the publish path (NPM_TOKEN is the bootstrap fallback for a package npm does not have yet)
+Release Preflight	Probe every release credential	2026-11-01T10:56:50.1855666Z Docker Hub:
+Release Preflight	Probe every release credential	2026-11-01T10:56:50.1856394Z   SKIP: DOCKERHUB_IMAGE is not set -- Docker publishing is disabled (scripts/check-docker-publish.mjs)
+Release Preflight	Probe every release credential	2026-11-01T10:56:50.1857138Z 
+Release Preflight	Probe every release credential	2026-11-01T10:56:50.1857352Z Release preflight: 0 verified, 1 failed, 0 unknown
+Release Preflight	Probe every release credential	2026-11-01T10:56:50.1879130Z ##[error]release-preflight: npm has no package @link-foundation/example-package-name yet, and npm configures trusted publishing only for published packages. Add an NPM_TOKEN repository secret (a granular token allowed to publish @link-foundation/example-package-name) at https://github.com/link-foundation/ui/settings/secrets/actions for the first release, then add a trusted publisher for link-foundation/ui, workflow release.yml, at https://www.npmjs.com/package/@link-foundation/example-package-name/access and delete the secret
+Release Preflight	Probe every release credential	2026-11-01T10:56:50.1888095Z ##[error]release-preflight: refusing to release with 1 refused credential(s)
+Release Preflight	Probe every release credential	2026-11-01T10:56:50.1892328Z ##[error]Process completed with exit code 1.
+Pipeline Status	Fail the run when a required job was cancelled or failed	﻿2026-11-01T10:59:44.0540206Z ##[group]Run bash scripts/check-pipeline-status.sh
+Pipeline Status	Fail the run when a required job was cancelled or failed	2026-11-01T10:59:44.0540673Z ^[[36;1mbash scripts/check-pipeline-status.sh^[[0m
+Pipeline Status	Fail the run when a required job was cancelled or failed	2026-11-01T10:59:44.0567582Z shell: /usr/bin/bash -e {0}
+Pipeline Status	Fail the run when a required job was cancelled or failed	2026-11-01T10:59:44.0567836Z env:
+Pipeline Status	Fail the run when a required job was cancelled or failed	2026-11-01T10:59:44.0568025Z   GIT_CONFIG_COUNT: 1
+Pipeline Status	Fail the run when a required job was cancelled or failed	2026-11-01T10:59:44.0568260Z   GIT_CONFIG_KEY_0: init.defaultBranch
+Pipeline Status	Fail the run when a required job was cancelled or failed	2026-11-01T10:59:44.0568527Z   GIT_CONFIG_VALUE_0: main
+Pipeline Status	Fail the run when a required job was cancelled or failed	2026-11-01T10:59:44.0571159Z   NEEDS_JSON: {
+Pipeline Status	Fail the run when a required job was cancelled or failed	  "detect-changes": {
+Pipeline Status	Fail the run when a required job was cancelled or failed	    "result": "success",
+Pipeline Status	Fail the run when a required job was cancelled or failed	    "outputs": {
+Pipeline Status	Fail the run when a required job was cancelled or failed	      "js-changed": "true",
+Pipeline Status	Fail the run when a required job was cancelled or failed	      "docs-changed": "true",
+Pipeline Status	Fail the run when a required job was cancelled or failed	      "any-code-changed": "true"
+Pipeline Status	Fail the run when a required job was cancelled or failed	    }
+Pipeline Status	Fail the run when a required job was cancelled or failed	  },
+Pipeline Status	Fail the run when a required job was cancelled or failed	  "test-compilation": {
+Pipeline Status	Fail the run when a required job was cancelled or failed	    "result": "success",
+Pipeline Status	Fail the run when a required job was cancelled or failed	    "outputs": {}
+Pipeline Status	Fail the run when a required job was cancelled or failed	  },
+Pipeline Status	Fail the run when a required job was cancelled or failed	  "check-file-line-limits": {
+Pipeline Status	Fail the run when a required job was cancelled or failed	    "result": "success",
+Pipeline Status	Fail the run when a required job was cancelled or failed	    "outputs": {}
+Pipeline Status	Fail the run when a required job was cancelled or failed	  },
+Pipeline Status	Fail the run when a required job was cancelled or failed	  "version-check": {
+Pipeline Status	Fail the run when a required job was cancelled or failed	    "result": "skipped",
+Pipeline Status	Fail the run when a required job was cancelled or failed	    "outputs": {}
+Pipeline Status	Fail the run when a required job was cancelled or failed	  },
+Pipeline Status	Fail the run when a required job was cancelled or failed	  "changeset-check": {
+Pipeline Status	Fail the run when a required job was cancelled or failed	    "result": "skipped",
+Pipeline Status	Fail the run when a required job was cancelled or failed	    "outputs": {}
+Pipeline Status	Fail the run when a required job was cancelled or failed	  },
+Pipeline Status	Fail the run when a required job was cancelled or failed	  "lint": {
+Pipeline Status	Fail the run when a required job was cancelled or failed	    "result": "success",
+Pipeline Status	Fail the run when a required job was cancelled or failed	    "outputs": {}
+Pipeline Status	Fail the run when a required job was cancelled or failed	  },
+Pipeline Status	Fail the run when a required job was cancelled or failed	  "test": {
+Pipeline Status	Fail the run when a required job was cancelled or failed	    "result": "success",
+Pipeline Status	Fail the run when a required job was cancelled or failed	    "outputs": {}
+Pipeline Status	Fail the run when a required job was cancelled or failed	  },
+Pipeline Status	Fail the run when a required job was cancelled or failed	  "docker-build": {
+Pipeline Status	Fail the run when a required job was cancelled or failed	    "result": "skipped",
+Pipeline Status	Fail the run when a required job was cancelled or failed	    "outputs": {}
+Pipeline Status	Fail the run when a required job was cancelled or failed	  },
+Pipeline Status	Fail the run when a required job was cancelled or failed	  "docker-publish-config": {
+Pipeline Status	Fail the run when a required job was cancelled or failed	    "result": "skipped",
+Pipeline Status	Fail the run when a required job was cancelled or failed	    "outputs": {}
+Pipeline Status	Fail the run when a required job was cancelled or failed	  },
+Pipeline Status	Fail the run when a required job was cancelled or failed	  "docker-publish-build": {
+Pipeline Status	Fail the run when a required job was cancelled or failed	    "result": "skipped",
+Pipeline Status	Fail the run when a required job was cancelled or failed	    "outputs": {}
+Pipeline Status	Fail the run when a required job was cancelled or failed	  },
+Pipeline Status	Fail the run when a required job was cancelled or failed	  "validate-docs": {
+Pipeline Status	Fail the run when a required job was cancelled or failed	    "result": "success",
+Pipeline Status	Fail the run when a required job was cancelled or failed	    "outputs": {}
+Pipeline Status	Fail the run when a required job was cancelled or failed	  },
+Pipeline Status	Fail the run when a required job was cancelled or failed	  "release-preflight": {
+Pipeline Status	Fail the run when a required job was cancelled or failed	    "result": "failure",
+Pipeline Status	Fail the run when a required job was cancelled or failed	    "outputs": {}
+Pipeline Status	Fail the run when a required job was cancelled or failed	  },
+Pipeline Status	Fail the run when a required job was cancelled or failed	  "release": {
+Pipeline Status	Fail the run when a required job was cancelled or failed	    "result": "skipped",
+Pipeline Status	Fail the run when a required job was cancelled or failed	    "outputs": {}
+Pipeline Status	Fail the run when a required job was cancelled or failed	  },
+Pipeline Status	Fail the run when a required job was cancelled or failed	  "instant-release": {
+Pipeline Status	Fail the run when a required job was cancelled or failed	    "result": "skipped",
+Pipeline Status	Fail the run when a required job was cancelled or failed	    "outputs": {}
+Pipeline Status	Fail the run when a required job was cancelled or failed	  },
+Pipeline Status	Fail the run when a required job was cancelled or failed	  "docker-publish": {
+Pipeline Status	Fail the run when a required job was cancelled or failed	    "result": "skipped",
+Pipeline Status	Fail the run when a required job was cancelled or failed	    "outputs": {}
+Pipeline Status	Fail the run when a required job was cancelled or failed	  },
+Pipeline Status	Fail the run when a required job was cancelled or failed	  "changeset-pr": {
+Pipeline Status	Fail the run when a required job was cancelled or failed	    "result": "skipped",
+Pipeline Status	Fail the run when a required job was cancelled or failed	    "outputs": {}
+Pipeline Status	Fail the run when a required job was cancelled or failed	  }
+Pipeline Status	Fail the run when a required job was cancelled or failed	}
+Pipeline Status	Fail the run when a required job was cancelled or failed	2026-11-01T10:59:44.0574241Z   RUN_SHA: 428ee078e1dac9caf52517410df9992605048c88
+Pipeline Status	Fail the run when a required job was cancelled or failed	2026-11-01T10:59:44.0574527Z   HEAD_REF: refs/heads/main
+Pipeline Status	Fail the run when a required job was cancelled or failed	2026-11-01T10:59:44.0574756Z ##[endgroup]
+Pipeline Status	Fail the run when a required job was cancelled or failed	2026-11-01T10:59:44.1167784Z Failed jobs:    release-preflight
+Pipeline Status	Fail the run when a required job was cancelled or failed	2026-11-01T10:59:44.1168260Z Cancelled jobs: <none>
+Pipeline Status	Fail the run when a required job was cancelled or failed	2026-11-01T10:59:44.1181609Z ##[error]Failing jobs: release-preflight
+Pipeline Status	Fail the run when a required job was cancelled or failed	2026-11-01T10:59:44.1191708Z ##[error]Process completed with exit code 1.

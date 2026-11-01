@@ -1,0 +1,93 @@
+Build web app	Check GitHub Pages source	﻿2026-11-01T10:56:53.9402827Z ##[group]Run bash scripts/check-pages.sh
+Build web app	Check GitHub Pages source	2026-11-01T10:56:53.9403380Z ^[[36;1mbash scripts/check-pages.sh^[[0m
+Build web app	Check GitHub Pages source	2026-11-01T10:56:53.9469504Z shell: /usr/bin/bash -e {0}
+Build web app	Check GitHub Pages source	2026-11-01T10:56:53.9470046Z env:
+Build web app	Check GitHub Pages source	2026-11-01T10:56:53.9470539Z   GIT_CONFIG_COUNT: 1
+Build web app	Check GitHub Pages source	2026-11-01T10:56:53.9470907Z   GIT_CONFIG_KEY_0: init.defaultBranch
+Build web app	Check GitHub Pages source	2026-11-01T10:56:53.9471252Z   GIT_CONFIG_VALUE_0: main
+Build web app	Check GitHub Pages source	2026-11-01T10:56:53.9473775Z   GH_TOKEN: ***
+Build web app	Check GitHub Pages source	2026-11-01T10:56:53.9474164Z   REPOSITORY: link-foundation/ui
+Build web app	Check GitHub Pages source	2026-11-01T10:56:53.9474586Z   PAGES_MODE: require
+Build web app	Check GitHub Pages source	2026-11-01T10:56:53.9474905Z ##[endgroup]
+Build web app	Check GitHub Pages source	2026-11-01T10:56:55.9105726Z ##[error]GitHub Pages is not enabled for link-foundation/ui, so the example app cannot deploy. A maintainer must act: Open https://github.com/link-foundation/ui/settings/pages and set Build and deployment -> Source to GitHub Actions, then re-run this workflow.
+Build web app	Check GitHub Pages source	2026-11-01T10:56:55.9117752Z ##[error]Process completed with exit code 1.
+Regenerate Preview Images	Commit drift back to main	﻿2026-11-01T10:57:35.9745572Z ##[group]Run export GH_TOKEN="${RELEASE_PR_TOKEN:-$BUILT_IN_TOKEN}"
+Regenerate Preview Images	Commit drift back to main	2026-11-01T10:57:35.9745886Z ^[[36;1mexport GH_TOKEN="${RELEASE_PR_TOKEN:-$BUILT_IN_TOKEN}"^[[0m
+Regenerate Preview Images	Commit drift back to main	2026-11-01T10:57:35.9746139Z ^[[36;1m# Configure gh as a step-scoped Git credential helper. The checkout^[[0m
+Regenerate Preview Images	Commit drift back to main	2026-11-01T10:57:35.9746399Z ^[[36;1m# remains credential-free during dependency installation.^[[0m
+Regenerate Preview Images	Commit drift back to main	2026-11-01T10:57:35.9746603Z ^[[36;1mgh auth setup-git^[[0m
+Regenerate Preview Images	Commit drift back to main	2026-11-01T10:57:35.9746766Z ^[[36;1mgit config user.name "github-actions[bot]"^[[0m
+Regenerate Preview Images	Commit drift back to main	2026-11-01T10:57:35.9747016Z ^[[36;1mgit config user.email "41898282+github-actions[bot]@users.noreply.github.com"^[[0m
+Regenerate Preview Images	Commit drift back to main	2026-11-01T10:57:35.9747307Z ^[[36;1m# Stage only generated artifacts so unrelated changes can't leak in.^[[0m
+Regenerate Preview Images	Commit drift back to main	2026-11-01T10:57:35.9747540Z ^[[36;1mgit add -- docs/screenshots/example-app/^[[0m
+Regenerate Preview Images	Commit drift back to main	2026-11-01T10:57:35.9747728Z ^[[36;1mif git diff --cached --quiet; then^[[0m
+Regenerate Preview Images	Commit drift back to main	2026-11-01T10:57:35.9748191Z ^[[36;1m  echo "::notice::No tracked preview-image changes to commit (drift was outside expected paths)."^[[0m
+Regenerate Preview Images	Commit drift back to main	2026-11-01T10:57:35.9748492Z ^[[36;1m  git status --porcelain^[[0m
+Regenerate Preview Images	Commit drift back to main	2026-11-01T10:57:35.9748631Z ^[[36;1m  exit 0^[[0m
+Regenerate Preview Images	Commit drift back to main	2026-11-01T10:57:35.9748743Z ^[[36;1mfi^[[0m
+Regenerate Preview Images	Commit drift back to main	2026-11-01T10:57:35.9748914Z ^[[36;1m# Screenshot-only pushes do not match this workflow's path filter.^[[0m
+Regenerate Preview Images	Commit drift back to main	2026-11-01T10:57:35.9749170Z ^[[36;1m# Do not add [skip ci]: a fallback PR needs its required checks.^[[0m
+Regenerate Preview Images	Commit drift back to main	2026-11-01T10:57:35.9749432Z ^[[36;1mgit commit -m "chore(preview): regenerate example-app preview images"^[[0m
+Regenerate Preview Images	Commit drift back to main	2026-11-01T10:57:35.9749663Z ^[[36;1mif [[ -n "$RELEASE_PR_TOKEN" ]]; then^[[0m
+Regenerate Preview Images	Commit drift back to main	2026-11-01T10:57:35.9749919Z ^[[36;1m  node scripts/push-main-with-rebase-retry.mjs origin main --label preview-images^[[0m
+Regenerate Preview Images	Commit drift back to main	2026-11-01T10:57:35.9750185Z ^[[36;1m  echo "landed=true" >> "$GITHUB_OUTPUT"^[[0m
+Regenerate Preview Images	Commit drift back to main	2026-11-01T10:57:35.9750342Z ^[[36;1m  exit 0^[[0m
+Regenerate Preview Images	Commit drift back to main	2026-11-01T10:57:35.9750453Z ^[[36;1mfi^[[0m
+Regenerate Preview Images	Commit drift back to main	2026-11-01T10:57:35.9750636Z ^[[36;1mecho "RELEASE_PR_TOKEN is not set: pushing with the built-in GITHUB_TOKEN."^[[0m
+Regenerate Preview Images	Commit drift back to main	2026-11-01T10:57:35.9750975Z ^[[36;1mif ! node scripts/push-main-with-rebase-retry.mjs origin main --label preview-images; then^[[0m
+Regenerate Preview Images	Commit drift back to main	2026-11-01T10:57:35.9751985Z ^[[36;1m  echo "::error title=Preview images need RELEASE_PR_TOKEN::The preview images changed, but main refused a push with the built-in GITHUB_TOKEN (a ruleset requires a pull request, and pull requests opened by that token do not run checks). Add a fine-grained token with Contents and Pull requests read/write access as the RELEASE_PR_TOKEN secret at $SECRETS_URL and re-run this job, or run 'npm run example:web:preview-images' locally and commit docs/screenshots/example-app/*.png."^[[0m
+Regenerate Preview Images	Commit drift back to main	2026-11-01T10:57:35.9752865Z ^[[36;1m  exit 1^[[0m
+Regenerate Preview Images	Commit drift back to main	2026-11-01T10:57:35.9752976Z ^[[36;1mfi^[[0m
+Regenerate Preview Images	Commit drift back to main	2026-11-01T10:57:35.9753103Z ^[[36;1mecho "landed=true" >> "$GITHUB_OUTPUT"^[[0m
+Regenerate Preview Images	Commit drift back to main	2026-11-01T10:57:35.9753540Z shell: bash --noprofile --norc -e -o pipefail {0}
+Regenerate Preview Images	Commit drift back to main	2026-11-01T10:57:35.9753701Z env:
+Regenerate Preview Images	Commit drift back to main	2026-11-01T10:57:35.9753813Z   GIT_CONFIG_COUNT: 1
+Regenerate Preview Images	Commit drift back to main	2026-11-01T10:57:35.9753946Z   GIT_CONFIG_KEY_0: init.defaultBranch
+Regenerate Preview Images	Commit drift back to main	2026-11-01T10:57:35.9754101Z   GIT_CONFIG_VALUE_0: main
+Regenerate Preview Images	Commit drift back to main	2026-11-01T10:57:35.9754249Z   PLAYWRIGHT_BROWSERS_PATH: /ms-playwright
+Regenerate Preview Images	Commit drift back to main	2026-11-01T10:57:35.9754404Z   RELEASE_PR_TOKEN: 
+Regenerate Preview Images	Commit drift back to main	2026-11-01T10:57:35.9756144Z   BUILT_IN_TOKEN: ***
+Regenerate Preview Images	Commit drift back to main	2026-11-01T10:57:35.9756344Z   SECRETS_URL: https://github.com/link-foundation/ui/settings/secrets/actions
+Regenerate Preview Images	Commit drift back to main	2026-11-01T10:57:35.9756631Z ##[endgroup]
+Regenerate Preview Images	Commit drift back to main	2026-11-01T10:57:36.0135492Z /__w/_temp/10b5d8bd-2a7e-4e5b-9b52-17b316a16d75.sh: line 4: gh: command not found
+Regenerate Preview Images	Commit drift back to main	2026-11-01T10:57:36.0173240Z ##[error]Process completed with exit code 127.
+Pipeline Status	Fail the run when a required job was cancelled or failed	﻿2026-11-01T10:58:06.2342030Z ##[group]Run bash scripts/check-pipeline-status.sh
+Pipeline Status	Fail the run when a required job was cancelled or failed	2026-11-01T10:58:06.2342568Z ^[[36;1mbash scripts/check-pipeline-status.sh^[[0m
+Pipeline Status	Fail the run when a required job was cancelled or failed	2026-11-01T10:58:06.2376095Z shell: /usr/bin/bash -e {0}
+Pipeline Status	Fail the run when a required job was cancelled or failed	2026-11-01T10:58:06.2376402Z env:
+Pipeline Status	Fail the run when a required job was cancelled or failed	2026-11-01T10:58:06.2376633Z   GIT_CONFIG_COUNT: 1
+Pipeline Status	Fail the run when a required job was cancelled or failed	2026-11-01T10:58:06.2376896Z   GIT_CONFIG_KEY_0: init.defaultBranch
+Pipeline Status	Fail the run when a required job was cancelled or failed	2026-11-01T10:58:06.2377204Z   GIT_CONFIG_VALUE_0: main
+Pipeline Status	Fail the run when a required job was cancelled or failed	2026-11-01T10:58:06.2378484Z   NEEDS_JSON: {
+Pipeline Status	Fail the run when a required job was cancelled or failed	  "web-build": {
+Pipeline Status	Fail the run when a required job was cancelled or failed	    "result": "failure",
+Pipeline Status	Fail the run when a required job was cancelled or failed	    "outputs": {}
+Pipeline Status	Fail the run when a required job was cancelled or failed	  },
+Pipeline Status	Fail the run when a required job was cancelled or failed	  "pages-deploy": {
+Pipeline Status	Fail the run when a required job was cancelled or failed	    "result": "skipped",
+Pipeline Status	Fail the run when a required job was cancelled or failed	    "outputs": {}
+Pipeline Status	Fail the run when a required job was cancelled or failed	  },
+Pipeline Status	Fail the run when a required job was cancelled or failed	  "desktop-package": {
+Pipeline Status	Fail the run when a required job was cancelled or failed	    "result": "success",
+Pipeline Status	Fail the run when a required job was cancelled or failed	    "outputs": {}
+Pipeline Status	Fail the run when a required job was cancelled or failed	  },
+Pipeline Status	Fail the run when a required job was cancelled or failed	  "android-build": {
+Pipeline Status	Fail the run when a required job was cancelled or failed	    "result": "skipped",
+Pipeline Status	Fail the run when a required job was cancelled or failed	    "outputs": {}
+Pipeline Status	Fail the run when a required job was cancelled or failed	  },
+Pipeline Status	Fail the run when a required job was cancelled or failed	  "ios-build": {
+Pipeline Status	Fail the run when a required job was cancelled or failed	    "result": "skipped",
+Pipeline Status	Fail the run when a required job was cancelled or failed	    "outputs": {}
+Pipeline Status	Fail the run when a required job was cancelled or failed	  },
+Pipeline Status	Fail the run when a required job was cancelled or failed	  "preview-regen": {
+Pipeline Status	Fail the run when a required job was cancelled or failed	    "result": "failure",
+Pipeline Status	Fail the run when a required job was cancelled or failed	    "outputs": {}
+Pipeline Status	Fail the run when a required job was cancelled or failed	  }
+Pipeline Status	Fail the run when a required job was cancelled or failed	}
+Pipeline Status	Fail the run when a required job was cancelled or failed	2026-11-01T10:58:06.2379849Z   RUN_SHA: 428ee078e1dac9caf52517410df9992605048c88
+Pipeline Status	Fail the run when a required job was cancelled or failed	2026-11-01T10:58:06.2380176Z   HEAD_REF: refs/heads/main
+Pipeline Status	Fail the run when a required job was cancelled or failed	2026-11-01T10:58:06.2380429Z ##[endgroup]
+Pipeline Status	Fail the run when a required job was cancelled or failed	2026-11-01T10:58:06.3022439Z Failed jobs:    web-build, preview-regen
+Pipeline Status	Fail the run when a required job was cancelled or failed	2026-11-01T10:58:06.3023128Z Cancelled jobs: <none>
+Pipeline Status	Fail the run when a required job was cancelled or failed	2026-11-01T10:58:06.3040275Z ##[error]Failing jobs: web-build, preview-regen
+Pipeline Status	Fail the run when a required job was cancelled or failed	2026-11-01T10:58:06.3050611Z ##[error]Process completed with exit code 1.
