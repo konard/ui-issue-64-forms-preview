@@ -31,6 +31,11 @@ history is kept in
 
 ## Quick Start
 
+The example app is deployed with GitHub Pages to
+<https://link-foundation.github.io/ui/>. The site goes live after a maintainer
+sets **Settings → Pages → Build and deployment → Source** to **GitHub Actions**
+(see [#5](https://github.com/link-foundation/ui/issues/5)).
+
 ### Using the Package
 
 ```bash
