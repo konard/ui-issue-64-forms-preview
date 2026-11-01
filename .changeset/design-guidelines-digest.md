@@ -1,4 +1,5 @@
 ---
+'@link-foundation/ui-core': patch
 ---
 
-Add the design guidelines digest in `docs/guidelines/` (component catalogue and token taxonomy as LiNo with a consistency test). Repository-level docs and tooling only; no package is released.
+Add the design guidelines digest in `docs/guidelines/`: a component catalogue and token taxonomy mapped to WAI-ARIA APG, Open UI, Material 3, Fluent 2, Apple HIG, MUI and DTCG, stored as LiNo with a consistency test.
