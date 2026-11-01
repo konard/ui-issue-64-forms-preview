@@ -6,9 +6,15 @@
  * A root package.json means the JavaScript package is the whole repository.
  * A js/package.json means releases share the repository with other languages
  * and need a language namespace in GitHub Releases.
+ * An npm workspaces root releases each package independently, so its tags are
+ * `<package-name>@<version>` (the Changesets convention for monorepos).
  */
 
 import { getJsRoot } from './js-paths.mjs';
+import {
+  isWorkspaceRoot,
+  resolveReleasePackage,
+} from './workspace-packages.mjs';
 
 const DEFAULT_LANGUAGE = 'JavaScript';
 const MULTI_LANGUAGE_TAG_PREFIX = 'js_v';
@@ -18,7 +24,21 @@ export function isMultiLanguage(options = {}) {
   return getJsRoot(options) !== '.';
 }
 
+// `options.workspace` overrides the detection (for callers that already know).
+export function isWorkspaceRelease(options = {}) {
+  if (typeof options.workspace === 'boolean') {
+    return options.workspace;
+  }
+  return isWorkspaceRoot(getJsRoot(options));
+}
+
 export function getDefaultTagPrefix(options = {}) {
+  if (isWorkspaceRelease(options)) {
+    const packageName =
+      options.packageName ||
+      resolveReleasePackage(getJsRoot(options), options).name;
+    return `${packageName}@`;
+  }
   return isMultiLanguage(options)
     ? MULTI_LANGUAGE_TAG_PREFIX
     : SINGLE_LANGUAGE_TAG_PREFIX;
@@ -40,7 +60,7 @@ export function normalizeReleaseVersion(releaseVersion) {
   }
 
   const semverTagMatch = trimmedVersion.match(
-    /(?:^|[-_])v?(\d+\.\d+\.\d+(?:-[0-9A-Za-z.-]+)?(?:\+[0-9A-Za-z.-]+)?)$/i
+    /(?:^|[-_@])v?(\d+\.\d+\.\d+(?:-[0-9A-Za-z.-]+)?(?:\+[0-9A-Za-z.-]+)?)$/i
   );
 
   if (semverTagMatch) {

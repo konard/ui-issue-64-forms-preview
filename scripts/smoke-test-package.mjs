@@ -14,7 +14,11 @@ import { tmpdir } from 'node:os';
 import { join, resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
 
-import { formatNpmPackageVersion, readPackageInfo } from './package-info.mjs';
+import {
+  formatNpmPackageVersion,
+  readPackageInfo,
+  readReleasePackages,
+} from './package-info.mjs';
 
 const DEFAULT_CLI_ARGS = ['--help'];
 const DEFAULT_MAX_ATTEMPTS = 35;
@@ -516,21 +520,33 @@ export async function main({
 } = {}) {
   try {
     const config = parseArgs(argv, env);
-    if (!config.packageVersion) {
+    const jsRoot = config.jsRoot || undefined;
+    // Without --package-version every release package is smoke tested at its
+    // local version (all publishable workspace packages in a monorepo).
+    const targets = config.packageVersion
+      ? [
+          {
+            name: config.packageName || readPackageInfo({ jsRoot }).name,
+            version: config.packageVersion,
+          },
+        ]
+      : config.packageName
+        ? [readPackageInfo({ jsRoot, packageName: config.packageName })]
+        : readReleasePackages({ jsRoot });
+    if (targets.length === 0) {
       stderr('Error: Missing required --package-version');
       stderr(USAGE);
       return 1;
     }
 
-    const packageInfo = config.packageName
-      ? { name: config.packageName }
-      : readPackageInfo({ jsRoot: config.jsRoot || undefined });
-
-    await smokeTestPackage({
-      ...config,
-      packageName: packageInfo.name,
-      stdout: (message) => stdout(`[smoke-test] ${message}`),
-    });
+    for (const target of targets) {
+      await smokeTestPackage({
+        ...config,
+        packageName: target.name,
+        packageVersion: target.version,
+        stdout: (message) => stdout(`[smoke-test] ${message}`),
+      });
+    }
     return 0;
   } catch (error) {
     stderr(`[smoke-test] FAILED: ${error.message}`);

@@ -20,15 +20,11 @@
  * supported through a configurable JavaScript package root.
  */
 
-import { readFileSync, writeFileSync } from 'fs';
-import { join } from 'path';
+import { existsSync, readFileSync, writeFileSync } from 'fs';
 
-import {
-  getJsRoot,
-  getPackageJsonPath,
-  needsCd,
-  parseJsRootConfig,
-} from './js-paths.mjs';
+import { getJsRoot, parseJsRootConfig } from './js-paths.mjs';
+import { readPackageInfo } from './package-info.mjs';
+import { packagePath } from './workspace-packages.mjs';
 import { bootstrapDependencies } from './bootstrap-dependencies.mjs';
 import { loadCommandStream, loadLinoArguments } from './use-module.mjs';
 import { captureVersionTree, syncVersionLock } from './version-lock.mjs';
@@ -90,14 +86,24 @@ try {
   console.log(`\nBumping version (${bumpType})...`);
 
   // Get current version
-  const packageJsonPath = getPackageJsonPath({ jsRoot });
+  // In an npm workspaces root the release package is bumped, not the root.
+  const {
+    dir: packageDir,
+    name: packageName,
+    packageJsonPath,
+  } = readPackageInfo({ jsRoot });
   const packageJson = JSON.parse(readFileSync(packageJsonPath, 'utf-8'));
   const oldVersion = packageJson.version;
   console.log(`Current version: ${oldVersion}`);
 
   // Bump version using npm version (doesn't create git tag)
   // IMPORTANT: cd is a virtual command that calls process.chdir(), so we restore after
-  if (needsCd({ jsRoot })) {
+  if (packageDir !== '.') {
+    // npm workspaces: bump only the release package; the lock file is
+    // synchronised by syncVersionLock below.
+    await $`cd ${jsRoot} && npm version ${bumpType} --workspace ${packageName} --no-git-tag-version --ignore-scripts --workspaces-update=false`;
+    process.chdir(originalCwd);
+  } else if (jsRoot !== '.') {
     await $`cd ${jsRoot} && npm version ${bumpType} --no-git-tag-version --ignore-scripts`;
     process.chdir(originalCwd);
   } else {
@@ -111,9 +117,10 @@ try {
 
   // Update CHANGELOG.md
   console.log('\nUpdating CHANGELOG.md...');
-  const changelogPath =
-    jsRoot === '.' ? 'CHANGELOG.md' : join(jsRoot, 'CHANGELOG.md');
-  let changelog = readFileSync(changelogPath, 'utf-8');
+  const changelogPath = packagePath(jsRoot, packageDir, 'CHANGELOG.md');
+  let changelog = existsSync(changelogPath)
+    ? readFileSync(changelogPath, 'utf-8')
+    : `# ${JSON.parse(readFileSync(packageJsonPath, 'utf-8')).name}\n`;
 
   // Create new changelog entry
   const newEntry = `## ${newVersion}
