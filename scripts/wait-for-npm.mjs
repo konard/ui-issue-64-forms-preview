@@ -17,8 +17,7 @@ import { formatNpmPackageVersion, readPackageInfo } from './package-info.mjs';
 
 // The first check is immediate; 153 ten-second sleeps span 25.5 minutes.
 const DEFAULT_MAX_ATTEMPTS = 154;
-const NPM_REGISTRY_USER_AGENT =
-  'js-ai-driven-development-pipeline-template wait-for-npm';
+const NPM_REGISTRY_USER_AGENT = 'link-foundation-ui wait-for-npm';
 const DEFAULT_SLEEP_SECONDS = 10;
 const USAGE =
   'Usage: node scripts/wait-for-npm.mjs --release-version <version> [--package-name <name>] [--max-attempts <count>] [--sleep-seconds <count>] [--js-root <path>]';

@@ -1,21 +1,22 @@
-# js-ai-driven-development-pipeline-template
+# link-foundation/ui
 
-A comprehensive template for AI-driven JavaScript/TypeScript development with full CI/CD pipeline support.
-
-This repository publishes the real test package
-`@link-foundation/example-package-name` so the template release pipeline is
-validated end to end with npm trusted publishing.
-
-## Associative UI framework plan
-
-This repository is becoming `link-foundation/ui`, an associative UI framework
-whose documents, configuration, styles and animations are written in
+`@link-foundation/ui` is an associative UI framework whose documents,
+configuration, styles and animations are written in
 [Links Notation](https://github.com/link-foundation/links-notation).
+
+The framework is at the planning stage: the package currently exports only its
+`version`, and the features arrive through the roadmap issues.
 
 - [docs/ARCHITECTURE.md](docs/ARCHITECTURE.md) — the target design.
 - [docs/ROADMAP.md](docs/ROADMAP.md) — the roadmap issues in dependency order.
 - [docs/case-studies/issue-1](docs/case-studies/issue-1/README.md) — the case
   study, requirements, solutions and research behind the plan.
+
+The repository was created from the
+[js-ai-driven-development-pipeline-template](https://github.com/link-foundation/js-ai-driven-development-pipeline-template),
+which provides the CI/CD pipeline described below. The template's release
+history is kept in
+[docs/template-history/CHANGELOG.md](docs/template-history/CHANGELOG.md).
 
 ## Features
 
@@ -30,13 +31,17 @@ whose documents, configuration, styles and animations are written in
 
 ## Quick Start
 
-### Using This Template
+### Using the Package
 
-1. Click "Use this template" on GitHub to create a new repository
-2. Clone your new repository
-3. Update `package.json` with your package name and description
-4. Install dependencies: `bun install`
-5. Start developing!
+```bash
+npm install @link-foundation/ui
+```
+
+```js
+import { version } from '@link-foundation/ui';
+
+console.log(version);
+```
 
 ### Development
 
@@ -64,9 +69,6 @@ bun run check
 npm install --prefix examples/universal-app
 npm run example:web:build
 npm run example:desktop:package
-
-# Try the CLI locally
-node bin/example-package-name.js add 2 3
 ```
 
 ## Project Structure
@@ -116,8 +118,8 @@ Note: `package-lock.json` is not committed by default to allow any package manag
 
 ### Universal App Example
 
-The template includes `examples/universal-app`, a Vite React app that imports
-`add` and `multiply` from `src/index.js` and renders a visual calculator UI.
+The repository includes `examples/universal-app`, a Vite React app that imports
+`version` from `src/index.js` and renders it in a visual UI.
 The same static build is used by:
 
 - GitHub Pages (`npm run example:web:build`)
@@ -279,15 +281,11 @@ Add regex patterns to `.lycheeignore` to exclude URLs from checks (e.g., local d
 
 ## Configuration
 
-### Updating Package Name
+### Package Name
 
-After creating a repository from this template, update the package name in:
-
-1. `package.json`: replace `"@link-foundation/example-package-name"` with your package name
-2. `.changeset/config.json`: Package references
-
-Release scripts derive the package name from `package.json` at runtime, so no
-script-level package-name constants need to be edited during template adoption.
+The root package is published as `@link-foundation/ui`. Release scripts derive
+the package name from `package.json` at runtime, so no script-level
+package-name constants need to be edited when it changes.
 
 ### Protected-Branch Release Pull Requests
 

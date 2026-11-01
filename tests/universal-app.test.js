@@ -45,14 +45,15 @@ describe('universal React example app', () => {
     expect(packageJson.scripts['mobile:ios:run']).toContain('cap run ios');
   });
 
-  it('renders a visual UI using the package add and multiply functions', () => {
+  it('renders a visual UI showing the package version', () => {
     const appSource = readText(appSourcePath);
 
-    expect(appSource).toContain("from '../../../src/index.js'");
-    expect(appSource).toContain('add(parsedLeft, parsedRight)');
-    expect(appSource).toContain('multiply(parsedLeft, parsedRight)');
-    expect(appSource).toContain('Addition');
-    expect(appSource).toContain('Multiplication');
+    expect(appSource).toContain(
+      "import { version } from '../../../src/index.js'"
+    );
+    expect(appSource).toContain('value: version');
+    expect(appSource).toContain('Package version');
+    expect(appSource).toContain('https://github.com/link-foundation/ui');
   });
 
   it('shares the Vite build output with Capacitor and GitHub Pages', () => {

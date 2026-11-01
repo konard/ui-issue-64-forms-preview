@@ -1,9 +1,9 @@
-import { createElement as h, useMemo, useState } from 'react';
-import { add, multiply } from '../../../src/index.js';
+import { createElement as h } from 'react';
+import { version } from '../../../src/index.js';
 
 const repositoryUrl =
   import.meta.env.VITE_REPOSITORY_URL ??
-  'https://github.com/link-foundation/js-ai-driven-development-pipeline-template';
+  'https://github.com/link-foundation/ui';
 
 const desktopTargets = [
   {
@@ -20,26 +20,6 @@ const desktopTargets = [
   },
 ];
 
-function parseInput(value) {
-  const number = Number(value);
-  return Number.isFinite(number) ? number : 0;
-}
-
-function NumberField({ id, label, value, onChange }) {
-  return h(
-    'label',
-    { className: 'number-field', htmlFor: id },
-    h('span', null, label),
-    h('input', {
-      id,
-      inputMode: 'decimal',
-      type: 'number',
-      value,
-      onChange: (event) => onChange(event.target.value),
-    })
-  );
-}
-
 function ResultTile({ label, value, tone }) {
   return h(
     'div',
@@ -54,19 +34,6 @@ function DownloadTarget({ label, detail }) {
 }
 
 export function App() {
-  const [left, setLeft] = useState('2');
-  const [right, setRight] = useState('3');
-  const parsedLeft = parseInput(left);
-  const parsedRight = parseInput(right);
-  const addition = useMemo(
-    () => add(parsedLeft, parsedRight),
-    [parsedLeft, parsedRight]
-  );
-  const multiplication = useMemo(
-    () => multiply(parsedLeft, parsedRight),
-    [parsedLeft, parsedRight]
-  );
-
   return h(
     'main',
     { className: 'app-shell' },
@@ -76,36 +43,15 @@ export function App() {
       h(
         'div',
         { className: 'calculator-panel' },
-        h('p', { className: 'eyebrow' }, 'Package function UI'),
-        h('h1', { id: 'calculator-title' }, 'Universal Example App'),
-        h(
-          'div',
-          { className: 'input-grid' },
-          h(NumberField, {
-            id: 'left-number',
-            label: 'First value',
-            value: left,
-            onChange: setLeft,
-          }),
-          h(NumberField, {
-            id: 'right-number',
-            label: 'Second value',
-            value: right,
-            onChange: setRight,
-          })
-        ),
+        h('p', { className: 'eyebrow' }, 'Associative UI framework'),
+        h('h1', { id: 'calculator-title' }, 'link-foundation/ui'),
         h(
           'div',
           { className: 'results-grid', 'aria-live': 'polite' },
           h(ResultTile, {
-            label: 'Addition',
-            value: addition,
+            label: 'Package version',
+            value: version,
             tone: 'green',
-          }),
-          h(ResultTile, {
-            label: 'Multiplication',
-            value: multiplication,
-            tone: 'blue',
           })
         )
       ),
