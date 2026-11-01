@@ -1,0 +1,45 @@
+{
+  "spec": "ui-dialect/0",
+  "elements": [
+    {
+      "id": "page",
+      "kind": "document",
+      "positional": [],
+      "properties": [
+        {
+          "name": "title",
+          "values": ["Children"]
+        }
+      ],
+      "children": [
+        {
+          "id": "main",
+          "kind": "stack",
+          "positional": [],
+          "properties": [],
+          "children": [
+            {
+              "id": "intro",
+              "kind": "text",
+              "positional": ["One"],
+              "properties": [],
+              "children": [],
+              "unknown": []
+            },
+            {
+              "id": "outro",
+              "kind": "text",
+              "positional": ["Two"],
+              "properties": [],
+              "children": [],
+              "unknown": []
+            }
+          ],
+          "unknown": []
+        }
+      ],
+      "unknown": []
+    }
+  ],
+  "diagnostics": []
+}

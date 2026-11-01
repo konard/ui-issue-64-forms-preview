@@ -1,0 +1,27 @@
+{
+  "spec": "ui-dialect/0",
+  "elements": [
+    {
+      "id": "fade",
+      "kind": "animation",
+      "positional": [],
+      "properties": [
+        {
+          "name": "target",
+          "values": ["ok"]
+        },
+        {
+          "name": "duration",
+          "values": ["200ms"]
+        },
+        {
+          "name": "track",
+          "values": ["opacity", ["key", "0", "0"], ["key", "1", "1"]]
+        }
+      ],
+      "children": [],
+      "unknown": []
+    }
+  ],
+  "diagnostics": []
+}

@@ -1,0 +1,28 @@
+{
+  "spec": "ui-dialect/0",
+  "elements": [
+    {
+      "id": "evil",
+      "kind": "button",
+      "positional": ["Click"],
+      "properties": [
+        {
+          "name": "on",
+          "values": ["press", ["navigate", "javascript:alert(1)"]]
+        }
+      ],
+      "children": [],
+      "unknown": []
+    }
+  ],
+  "diagnostics": [
+    {
+      "code": "unsafe-url",
+      "severity": "error",
+      "at": {
+        "element": "evil",
+        "property": "on"
+      }
+    }
+  ]
+}

@@ -19,6 +19,8 @@
     "format": "prettier --write .",
     "format:check": "prettier --check .",
     "check:duplication": "jscpd .",
+    "check:assets": "node scripts/check-assets.mjs",
+    "assets:attributions": "node scripts/render-attributions.mjs",
     "check": "npm run lint && npm run format:check && npm run check:duplication",
     "example:web:dev": "npm --prefix examples/universal-app run dev",
     "example:web:build": "npm --prefix examples/universal-app run build",
@@ -31,7 +33,8 @@
     "changeset": "changeset",
     "changeset:version": "node scripts/changeset-version.mjs",
     "changeset:publish": "changeset publish",
-    "changeset:status": "changeset status --since=origin/main"
+    "changeset:status": "changeset status --since=origin/main",
+    "check:spec": "node scripts/check-spec-fixtures.mjs"
   },
   "keywords": [
     "ui",
@@ -70,6 +73,7 @@
     "eslint-plugin-prettier": "^5.5.4",
     "husky": "^9.1.7",
     "jscpd": "^5.4.0",
+    "links-notation": "^0.27.1",
     "lino-arguments": "0.4.0",
     "lint-staged": "^16.4.0",
     "prettier": "^3.6.2",

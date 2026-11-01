@@ -1,0 +1,44 @@
+{
+  "spec": "ui-dialect/0",
+  "elements": [
+    {
+      "id": "brand",
+      "kind": "theme",
+      "positional": [],
+      "properties": [
+        {
+          "name": "token",
+          "values": ["color.primary", "#6750A4"]
+        },
+        {
+          "name": "token",
+          "values": ["color.scrim", "#6750A4CC"]
+        },
+        {
+          "name": "token",
+          "values": ["color.short", "#FFF"]
+        }
+      ],
+      "children": [],
+      "unknown": []
+    },
+    {
+      "id": "chip",
+      "kind": "style",
+      "positional": [],
+      "properties": [
+        {
+          "name": "background",
+          "values": ["#6750A4"]
+        },
+        {
+          "name": "color",
+          "values": ["#FFFFFF"]
+        }
+      ],
+      "children": [],
+      "unknown": []
+    }
+  ],
+  "diagnostics": []
+}

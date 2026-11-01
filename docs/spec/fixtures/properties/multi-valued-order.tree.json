@@ -1,0 +1,27 @@
+{
+  "spec": "ui-dialect/0",
+  "elements": [
+    {
+      "id": "ok",
+      "kind": "button",
+      "positional": [],
+      "properties": [
+        {
+          "name": "on",
+          "values": ["press", ["emit", "pressed"]]
+        },
+        {
+          "name": "on",
+          "values": ["focus", ["emit", "focused"]]
+        },
+        {
+          "name": "on",
+          "values": ["press", ["navigate", "home"]]
+        }
+      ],
+      "children": [],
+      "unknown": []
+    }
+  ],
+  "diagnostics": []
+}

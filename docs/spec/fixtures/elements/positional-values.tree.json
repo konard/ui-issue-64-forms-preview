@@ -1,0 +1,27 @@
+{
+  "spec": "ui-dialect/0",
+  "elements": [
+    {
+      "id": "greeting",
+      "kind": "text",
+      "positional": ["Hello, links"],
+      "properties": [],
+      "children": [],
+      "unknown": []
+    },
+    {
+      "id": "ok",
+      "kind": "button",
+      "positional": ["OK"],
+      "properties": [
+        {
+          "name": "variant",
+          "values": ["outlined"]
+        }
+      ],
+      "children": [],
+      "unknown": []
+    }
+  ],
+  "diagnostics": []
+}

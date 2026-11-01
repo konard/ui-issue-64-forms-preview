@@ -1,0 +1,4 @@
+(ok: button
+  (label 'OK')
+  (variant filled)
+  (on press (navigate home)))

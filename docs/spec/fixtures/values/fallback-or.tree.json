@@ -1,0 +1,34 @@
+{
+  "spec": "ui-dialect/0",
+  "elements": [
+    {
+      "id": "spaced",
+      "kind": "stack",
+      "positional": [],
+      "properties": [
+        {
+          "name": "gap",
+          "values": [
+            ["or", ["token", "space.large"], ["token", "space.medium"], "8px"]
+          ]
+        }
+      ],
+      "children": [],
+      "unknown": []
+    },
+    {
+      "id": "tinted",
+      "kind": "style",
+      "positional": [],
+      "properties": [
+        {
+          "name": "background",
+          "values": [["or", ["token", "color.accent"], "#3390EC"]]
+        }
+      ],
+      "children": [],
+      "unknown": []
+    }
+  ],
+  "diagnostics": []
+}

@@ -1,0 +1,32 @@
+{
+  "spec": "ui-dialect/0",
+  "elements": [
+    {
+      "id": "home",
+      "kind": "document",
+      "positional": [],
+      "properties": [
+        {
+          "name": "title",
+          "values": ["Home"]
+        }
+      ],
+      "children": [],
+      "unknown": []
+    },
+    {
+      "id": "about",
+      "kind": "document",
+      "positional": [],
+      "properties": [
+        {
+          "name": "title",
+          "values": ["About"]
+        }
+      ],
+      "children": [],
+      "unknown": []
+    }
+  ],
+  "diagnostics": []
+}

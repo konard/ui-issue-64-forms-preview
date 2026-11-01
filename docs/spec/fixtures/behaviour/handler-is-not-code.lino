@@ -1,0 +1,1 @@
+(bad: button 'Bad' (on press 'alert(1)'))

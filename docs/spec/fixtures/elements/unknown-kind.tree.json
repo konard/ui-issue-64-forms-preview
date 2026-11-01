@@ -1,0 +1,31 @@
+{
+  "spec": "ui-dialect/0",
+  "elements": [
+    {
+      "id": "chart-1",
+      "kind": "chart",
+      "positional": [],
+      "properties": [],
+      "children": [],
+      "unknown": [["series", "1", "2", "3"]]
+    }
+  ],
+  "diagnostics": [
+    {
+      "code": "unknown-kind",
+      "severity": "warning",
+      "at": {
+        "element": "chart-1",
+        "kind": "chart"
+      }
+    },
+    {
+      "code": "unknown-sublink",
+      "severity": "warning",
+      "at": {
+        "element": "chart-1",
+        "head": "series"
+      }
+    }
+  ]
+}

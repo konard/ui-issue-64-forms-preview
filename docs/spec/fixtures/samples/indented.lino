@@ -1,0 +1,6 @@
+app: document
+  title 'Links UI demo'
+  body: stack
+    greeting: text 'Hello, links'
+    ok: button
+      label 'OK'

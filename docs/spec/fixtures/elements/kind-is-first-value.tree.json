@@ -1,0 +1,22 @@
+{
+  "spec": "ui-dialect/0",
+  "elements": [
+    {
+      "id": "button.save",
+      "kind": "button",
+      "positional": ["Save"],
+      "properties": [],
+      "children": [],
+      "unknown": []
+    },
+    {
+      "id": "save",
+      "kind": "text",
+      "positional": ["button is the kind of the first link, text of this one"],
+      "properties": [],
+      "children": [],
+      "unknown": []
+    }
+  ],
+  "diagnostics": []
+}
