@@ -1,5 +1,5 @@
 import { createElement as h } from 'react';
-import { version } from '../../../src/index.js';
+import { UI_DIALECT_VERSION } from '../../../packages/ui-core/src/index.js';
 
 const repositoryUrl =
   import.meta.env.VITE_REPOSITORY_URL ??
@@ -49,8 +49,8 @@ export function App() {
           'div',
           { className: 'results-grid', 'aria-live': 'polite' },
           h(ResultTile, {
-            label: 'Package version',
-            value: version,
+            label: 'UI dialect version',
+            value: UI_DIALECT_VERSION,
             tone: 'green',
           })
         )

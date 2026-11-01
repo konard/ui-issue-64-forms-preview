@@ -45,14 +45,14 @@ describe('universal React example app', () => {
     expect(packageJson.scripts['mobile:ios:run']).toContain('cap run ios');
   });
 
-  it('renders a visual UI showing the package version', () => {
+  it('renders a visual UI showing the ui-core dialect version', () => {
     const appSource = readText(appSourcePath);
 
     expect(appSource).toContain(
-      "import { version } from '../../../src/index.js'"
+      "import { UI_DIALECT_VERSION } from '../../../packages/ui-core/src/index.js'"
     );
-    expect(appSource).toContain('value: version');
-    expect(appSource).toContain('Package version');
+    expect(appSource).toContain('value: UI_DIALECT_VERSION');
+    expect(appSource).toContain('UI dialect version');
     expect(appSource).toContain('https://github.com/link-foundation/ui');
   });
 

@@ -104,13 +104,15 @@ explain_npm_exchange_404() {
 
 check_npm_oidc() {
   local oidc_url="$1" request_token="${ACTIONS_ID_TOKEN_REQUEST_TOKEN:-}"
-  local package response status payload jwt separator='?'
+  local packages package response status payload jwt separator='?'
   if [ -z "$request_token" ]; then
     bad 'npm OIDC request token is missing'
     return
   fi
-  package=$(node -e 'import("./scripts/js-paths.mjs").then(async p=>{const i=await import("./scripts/package-info.mjs");process.stdout.write(encodeURIComponent(i.readPackageInfo({jsRoot:p.parseJsRootConfig()}).name))}).catch(()=>process.exit(1))' 2>/dev/null)
-  if [ -z "$package" ]; then
+  # Every publishable package: the root package, or each non-private npm
+  # workspace package (scripts/workspace-packages.mjs).
+  packages=$(node -e 'import("./scripts/js-paths.mjs").then(async p=>{const i=await import("./scripts/package-info.mjs");const names=i.readReleasePackages({jsRoot:p.parseJsRootConfig()}).map(x=>encodeURIComponent(x.name));if(!names.length)process.exit(1);process.stdout.write(names.join("\n"))}).catch(()=>process.exit(1))' 2>/dev/null)
+  if [ -z "$packages" ]; then
     bad 'npm OIDC package metadata could not be read'
     return
   fi
@@ -127,6 +129,13 @@ check_npm_oidc() {
     bad 'npm OIDC JWT response is malformed'
     return
   fi
+  while IFS= read -r package; do
+    check_npm_oidc_package "$jwt" "$package"
+  done <<<"$packages"
+}
+
+check_npm_oidc_package() {
+  local jwt="$1" package="$2" response status payload
   response=$(http -X POST -H "Authorization: Bearer $jwt" \
     "$NPM_REGISTRY/-/npm/v1/oidc/token/exchange/package/$package")
   status="${response##*"$NEWLINE"}"

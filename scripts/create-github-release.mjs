@@ -17,6 +17,7 @@ import { fileURLToPath } from 'node:url';
 
 import { getJsRoot } from './js-paths.mjs';
 import { readPackageInfo } from './package-info.mjs';
+import { packagePath } from './workspace-packages.mjs';
 import { markdownLines } from './markdown-lines.mjs';
 import {
   buildReleaseTag,
@@ -268,14 +269,15 @@ export function main({
     }
 
     const jsRoot = getJsRoot({ jsRoot: configuredJsRoot || undefined });
-    const tag = buildReleaseTag(version, { jsRoot, tagPrefix });
+    const { name: packageName, dir: packageDir } = readPackageInfo({
+      jsRoot,
+    });
+    const tag = buildReleaseTag(version, { jsRoot, packageName, tagPrefix });
     const normalizedVersion = normalizeReleaseVersion(version);
-    const { name: packageName } = readPackageInfo({ jsRoot });
 
     stdout(`Creating GitHub release for ${tag}...`);
 
-    const changelogPath =
-      jsRoot === '.' ? 'CHANGELOG.md' : path.join(jsRoot, 'CHANGELOG.md');
+    const changelogPath = packagePath(jsRoot, packageDir, 'CHANGELOG.md');
     const changelog = readFileSync(path.join(cwd, changelogPath), 'utf8');
     const payload = buildReleasePayload({
       changelog,
