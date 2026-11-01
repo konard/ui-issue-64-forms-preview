@@ -1,0 +1,30 @@
+single line      -> [ '(ok: button (label OK) (on press (navigate home)))' ]
+multi-line parens -> [
+  '((ok: button) ((ok: button) (label OK)) ((ok: button) (on press (navigate home))))'
+]
+indented parse()  -> [
+  '(ok: button)',
+  '((ok: button) (label OK))',
+  '((ok: button) (on press))',
+  '(((ok: button) (on press)) (navigate home))'
+]
+indented parseGroups() -> [
+  {
+    "element": "(ok: button)",
+    "children": [
+      {
+        "element": "(label OK)",
+        "children": []
+      },
+      {
+        "element": "(on press)",
+        "children": [
+          {
+            "element": "(navigate home)",
+            "children": []
+          }
+        ]
+      }
+    ]
+  }
+]
