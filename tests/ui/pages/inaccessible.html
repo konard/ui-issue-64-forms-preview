@@ -1,0 +1,18 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Deliberately inaccessible page</title>
+  </head>
+  <body>
+    <main>
+      <h1>Negative fixture</h1>
+      <!-- Violation: label (input without an accessible name). -->
+      <input type="text" />
+      <!-- Violation: color-contrast (about 1.5:1). -->
+      <button type="button" style="background: #ffffff; color: #cccccc">
+        Low contrast
+      </button>
+    </main>
+  </body>
+</html>

@@ -104,6 +104,20 @@ export default [
     },
   },
   {
+    // Playwright UI tests: callbacks passed to page.evaluate run in the
+    // browser, so browser globals are available there.
+    files: ['**/*.e2e.mjs'],
+    languageOptions: {
+      globals: {
+        document: 'readonly',
+        window: 'readonly',
+      },
+    },
+    rules: {
+      'require-await': 'off',
+    },
+  },
+  {
     // Test files have different requirements
     files: ['tests/**/*.js', 'packages/*/tests/**/*.js', '**/*.test.js'],
     rules: {
@@ -128,6 +142,8 @@ export default [
       '**/node_modules/**',
       'coverage/**',
       'dist/**',
+      'playwright-report/**',
+      'test-results/**',
       '**/dist/**',
       '**/out/**',
       '*.min.js',

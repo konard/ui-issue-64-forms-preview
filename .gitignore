@@ -141,3 +141,8 @@ vite.config.ts.timestamp-*
 
 # jscpd reports
 reports/
+
+# Playwright UI tests
+playwright-report/
+test-results/
+blob-report/
