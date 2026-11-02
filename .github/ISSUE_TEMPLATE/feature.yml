@@ -2,7 +2,6 @@ name: Feature
 description: Propose a feature with the sections an AI coding agent needs to deliver it.
 title: '<package>: <what the feature does>'
 labels: [enhancement]
-type: Feature
 body:
   - type: markdown
     attributes:
