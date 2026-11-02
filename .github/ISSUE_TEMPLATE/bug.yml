@@ -2,7 +2,6 @@ name: Bug
 description: Report a defect with exact reproduction steps and a verifiable fix.
 title: '<area>: <what is wrong>'
 labels: [bug]
-type: Bug
 body:
   - type: markdown
     attributes:
